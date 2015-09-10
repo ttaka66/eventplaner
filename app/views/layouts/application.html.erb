@@ -8,6 +8,46 @@
 </head>
 <body>
 
+	<header>
+		<nav class="navbar navbar-default navbar-fixed-top">
+
+
+			<div class="navbar-header">
+				<button class="navbar-toggle" data-toggle="collapse" data-target=".target">
+					<span class="icon_bar"></span>
+					<span class="icon_bar"></span>
+					<span class="icon_bar"></span>
+				</button>
+				<a class="navbar-brand" href="/articles">Home</a>
+			</div><!-- .navbar-header -->
+
+
+			<div class="collapse navbar-collapse target">
+				<ul class="nav navbar-nav">
+
+
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
+					<% if user_signed_in? %> 
+					<li><%= link_to 'プロフィール変更', edit_user_registration_path %></li>
+					<li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+
+					<% else %>
+					<li><%= link_to "Sign up", new_user_registration_path %></li>
+					<li><%= link_to "Log in", new_user_session_path %></li>
+
+					<% end %>
+
+				</ul>
+			</div><!-- .collapse navbar-collapse target -->
+		</nav>
+	</header>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
 <%= yield %>
 
 </body>

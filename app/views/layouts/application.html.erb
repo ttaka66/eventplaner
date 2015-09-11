@@ -11,7 +11,7 @@
 	<header>
 		<nav class="navbar navbar-default navbar-fixed-top">
 
-
+			<div class="container">
 			<div class="navbar-header">
 				<button class="navbar-toggle" data-toggle="collapse" data-target=".target">
 					<span class="icon_bar"></span>
@@ -35,19 +35,78 @@
 					<li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
 
 					<% else %>
-					<li><%= link_to "Log in", new_user_session_path %></li>
+					<li>
+						<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#login_view">
+							Log in
+						</button>
+					</li>
 
 					<% end %>
 
 				</ul>
 			</div><!-- .collapse navbar-collapse target -->
+			</div>
 		</nav>
+
 	</header>
+
+	<!-- ログインの為のモーダルウィンドウ -->
+	<% unless user_signed_in? %>
+		<div id="login_view" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header" align="center">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Log in</h4>
+					</div>
+					<div class="modal-body" align="center">
+
+						<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+						<div class="field">
+							<%= f.label :email %><br />
+							<%= f.email_field :email, autofocus: true %>
+						</div>
+
+						<div class="field">
+							<%= f.label :password %><br />
+							<%= f.password_field :password, autocomplete: "off" %>
+						</div>
+
+						<% if devise_mapping.rememberable? -%>
+						<div class="field">
+							<%= f.check_box :remember_me %>
+							<%= f.label :remember_me %>
+						</div>
+						<% end %>
+						
+						<%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+
+						<div class="actions">
+							<%= f.submit "Log in", class: "btn btn-primary" %>
+						</div>
+
+						<% end %>
+
+					</div>
+					<div class="modal-footer" align="center">
+						<%= link_to "Sign up", new_registration_path(resource_name),style: "text-align:center;" %><br />
+
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div><!-- /.modal-footer -->
+					
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.login_view -->
+	<% end %>
 
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 
-<%= yield %>
+<div class="container">
+	<%= yield %>
+</div>
+
+
 
 </body>
 </html>

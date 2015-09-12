@@ -1,0 +1,9 @@
+<% if @act == 'group' %>
+	<h1><%= t 'invitate event' %></h1>
+<% else %>
+	<h1><%= t 'add event' %></h1>
+<% end %>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', events_path %>

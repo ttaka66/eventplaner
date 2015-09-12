@@ -31,13 +31,13 @@
 				<ul class="nav navbar-nav navbar-right">
 					<!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
 					<% if user_signed_in? %> 
-					<li><%= link_to 'プロフィール変更', edit_user_registration_path %></li>
-					<li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+					<li><%= link_to t('change profile'), edit_user_registration_path %></li>
+					<li><%= link_to t('log out'), destroy_user_session_path, method: :delete %></li>
 
 					<% else %>
 					<li>
 						<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#login_view">
-							Log in
+							<%= t 'log in' %>
 						</button>
 					</li>
 

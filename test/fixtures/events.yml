@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  message: MyString
+  start: 2015-09-11 08:12:20
+  end: 2015-09-11 08:12:20
+  color: MyString
+  orner: 1
+  allday: false
+  category: MyString
+  place: MyString
+  address: MyString
+  cost: 1
+  password: MyString
+
+two:
+  title: MyString
+  message: MyString
+  start: 2015-09-11 08:12:20
+  end: 2015-09-11 08:12:20
+  color: MyString
+  orner: 1
+  allday: false
+  category: MyString
+  place: MyString
+  address: MyString
+  cost: 1
+  password: MyString

@@ -21,3 +21,7 @@
 
 en:
   hello: "Hello world"
+
+  log in: 'Log in'
+  change profile: 'Change profile'
+  log out: 'Log out'

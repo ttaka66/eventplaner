@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_and_belongs_to_many :events
+  has_many :entries
+  has_many :timeplans, through: :entries
 end

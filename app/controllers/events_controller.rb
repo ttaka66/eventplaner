@@ -16,14 +16,40 @@ class EventsController < ApplicationController
   def new
     @act = params[:act]
     @event = Event.new
+
+    if @act == 'group'
+      # @event.timeplans.build
+      3.times { @event.timeplans.build }
+      # @invitees = []
+    end
+    
     respond_with(@event)
+    
   end
 
   def edit
   end
 
   def create
-    @login_user.events.create(event_params)
+    if params[:act] == 'group'
+
+      # イベントに対する候補日時を作成
+      @event = Event.new(event_params)
+      # render json: @event.timeplans
+      
+      @event.timeplans.each do |tp|
+        # 招待メンバーのユーザー名を取得
+        params['invitees'].each do |inv|
+          # Userモデルを作成
+          i = User.find_by(username: inv)
+          tp.users << i
+        end
+
+      end
+      @event.save
+    else
+      @login_user.events.create(event_params)
+    end
     respond_with(@event, location: calendar_index_path)
   end
 
@@ -43,7 +69,21 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:title, :message, :start, :end, :color, :orner, :allday, :category, :place, :address, :cost, :password)
+      params.require(:event).permit(
+        :title,
+        :message,
+        :start,
+        :end,
+        :color,
+        :orner,
+        :allday,
+        :category,
+        :place,
+        :address,
+        :cost,
+        :password,
+        timeplans_attributes: [:start, :end]
+        )
     end
 
     def set_login_user

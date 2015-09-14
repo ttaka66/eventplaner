@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150911090039) do
+ActiveRecord::Schema.define(version: 20150912153022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "entries", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "timeplan_id"
+    t.boolean  "attendance",  default: false
+    t.string   "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "entries", ["timeplan_id"], name: "index_entries_on_timeplan_id", using: :btree
+  add_index "entries", ["user_id"], name: "index_entries_on_user_id", using: :btree
 
   create_table "events", force: true do |t|
     t.string   "title"
@@ -37,6 +49,18 @@ ActiveRecord::Schema.define(version: 20150911090039) do
     t.integer "user_id",  null: false
     t.integer "event_id", null: false
   end
+
+  create_table "timeplans", force: true do |t|
+    t.integer  "event_id"
+    t.datetime "start"
+    t.datetime "end"
+    t.string   "place"
+    t.string   "address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "timeplans", ["event_id"], name: "index_timeplans_on_event_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

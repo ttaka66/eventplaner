@@ -215,3 +215,6 @@ ja:
 
   add event: 'イベントを追加'
   invitate event: 'イベントに招待'
+  date and time candidate: '日時候補'
+  candidate: '候補'
+  invitees: '招待メンバー'

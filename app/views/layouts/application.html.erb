@@ -23,27 +23,29 @@
 
 
 			<div class="collapse navbar-collapse target">
+			<% if user_signed_in? %> 
 				<ul class="nav navbar-nav">
+					<li><%= link_to t('hoseted event'), host_events_path %></li>
+					<li><%= link_to t('invited event'), gest_events_path %></li>
 
 
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
 					<!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
-					<% if user_signed_in? %> 
+					
 					<li><%= link_to t('change profile'), edit_user_registration_path %></li>
 					<li><%= link_to t('log out'), destroy_user_session_path, method: :delete %></li>
-
-					<% else %>
+				</ul>
+			<% else %>
+				<ul class="nav navbar-nav navbar-right">	
 					<li>
 						<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#login_view">
 							<%= t 'log in' %>
 						</button>
 					</li>
-
-					<% end %>
-
 				</ul>
+			<% end %>
 			</div><!-- .collapse navbar-collapse target -->
 			</div>
 		</nav>

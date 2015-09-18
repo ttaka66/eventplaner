@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :set_login_user, only: [:index, :new, :create]
+  before_action :set_login_user, only: [:index, :host, :gest, :show, :new, :create]
 
   respond_to :html
 
@@ -9,8 +9,34 @@ class EventsController < ApplicationController
     # respond_with(@events)
   end
 
+  def host
+    @events = Event.where(orner: @login_user.id).order(created_at: :desc)
+  end
+
+  def gest
+    @plans = @login_user.timeplans.select(:event_id).distinct
+  end
+
   def show
-    respond_with(@event)
+    if @event.color = 'yellow'
+      # イベントに関するプラン取得
+      @timeplans = @event.timeplans
+
+      # 個々のプラン取得
+      @timeplans.each do |tp|
+        # Timeplanに関する参加人数を集計
+        cnt = Entry.where(timeplan_id: tp.id, attendance: true).count
+        # attend_cntに代入
+        tp.attend_cnt = cnt
+        # 自分の出欠を取得
+        entry = Entry.find_by(user_id: current_user, timeplan_id: tp.id)
+        # my_attendにentryオブジェクトを代入
+        tp.my_entry = entry
+
+      end
+      render 'undecided'
+    end
+    # respond_with(@event)
   end
 
   def new
@@ -20,7 +46,6 @@ class EventsController < ApplicationController
     if @act == 'group'
       # @event.timeplans.build
       3.times { @event.timeplans.build }
-      # @invitees = []
     end
     
     respond_with(@event)
@@ -38,17 +63,24 @@ class EventsController < ApplicationController
       # render json: @event.timeplans
       
       @event.timeplans.each do |tp|
+        # 自分を候補日時に関連させる
+        tp.users << @login_user
+
         # 招待メンバーのユーザー名を取得
         params['invitees'].each do |inv|
-          # Userモデルを作成
-          i = User.find_by(username: inv)
-          tp.users << i
+          # Userモデルを取得
+          if i = User.find_by(username: inv)
+            # 候補日時に関連するユーザーを作成
+            tp.users << i
+          end
         end
 
       end
       @event.save
+
     else
       @login_user.events.create(event_params)
+
     end
     respond_with(@event, location: calendar_index_path)
   end

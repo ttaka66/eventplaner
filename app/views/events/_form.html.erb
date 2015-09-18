@@ -24,10 +24,9 @@
       <%= f.label :message %><br>
       <%= f.text_area :message %>
     </div>
-    <%= f.label :timeplans, t('date and time candidate') %><br />
     <% i = 1 %>
     <%= f.fields_for :timeplans do |tp| %>
-      <h3><%= t("candidate") + i.to_s %></h3>
+      <h3><%= t("date and time candidate") + i.to_s %></h3>
       <div class="field">
         <%= tp.label :start %><br>
         <%= tp.datetime_select :start %>

@@ -191,7 +191,7 @@ ja:
     formats:
       default: "%Y/%m/%d %H:%M:%S"
       long: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
-      short: "%y/%m/%d %H:%M"
+      short: "%y/%m/%d(%a) %H:%M"
     pm: 午後
 
   attributes:
@@ -215,6 +215,20 @@ ja:
 
   add event: 'イベントを追加'
   invitate event: 'イベントに招待'
-  date and time candidate: '日時候補'
+  date and time candidate: '候補日時'
   candidate: '候補'
   invitees: '招待メンバー'
+  hoseted event: '主催しているイベント'
+  invited event: '招待されているイベント'
+  there is no invited event: '招待されているイベントはありません'
+  there is no hoseted event: '主催しているイベントはありません'
+  participant: '参加者'
+  message: 'メッセージ'
+  people can participate: '人参加できます'
+  there is no attendance people: '参加する人はいません'
+  I can attend: '参加できます'
+  I can't attend: '参加できません'
+  starttime: '開始時間'
+  endtime: '終了時間'
+  do you want to cancel ?: 'キャンセルしますか?'
+  Yes I do: 'はい'

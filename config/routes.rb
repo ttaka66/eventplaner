@@ -1,8 +1,17 @@
 Rails.application.routes.draw do
 
-  resources :events
+  resources :events do
+    collection do
+      get :host
+      get :gest
+    end
+  end
+
+  resources :entries
 
   get 'calendar/index'
+
+
 
   devise_for :users
 

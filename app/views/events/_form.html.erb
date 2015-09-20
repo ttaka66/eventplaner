@@ -55,13 +55,17 @@
     <%= f.label :allday %><br>
     <%= f.check_box :allday %>
   </div>
+
+  <% if @act == 'group' %>
   
-  <h3><%= t('invitees') %></h3>
-  <div class="field">
-    <%= text_field_tag 'invitees[]' %>
-    <%= text_field_tag 'invitees[]' %>
-    <%= text_field_tag 'invitees[]' %>
-  </div>
+    <h3><%= t('invitees') %></h3>
+    <div class="field">
+      <%= text_field_tag 'invitees[]' %>
+      <%= text_field_tag 'invitees[]' %>
+      <%= text_field_tag 'invitees[]' %>
+    </div>
+
+  <% end %>
 
   <div class="field">
     <%= f.label :category %><br>
@@ -89,6 +93,7 @@
     </div>
     <%= f.hidden_field :orner, value: @login_user.id %>
   <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>

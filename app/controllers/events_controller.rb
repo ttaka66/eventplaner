@@ -19,7 +19,7 @@ class EventsController < ApplicationController
 
   def show
     # イベント未確定の場合
-    if @event.color = 'yellow'
+    if @event.color == 'yellow'
       # イベントに関するプラン取得
       @timeplans = @event.timeplans
 
@@ -35,9 +35,9 @@ class EventsController < ApplicationController
         tp.my_entry = entry
 
       end
-      render 'undecided'
+      render 'undecided' and return
     end
-    # respond_with(@event)
+    respond_with(@event)
   end
 
   def new
@@ -57,10 +57,10 @@ class EventsController < ApplicationController
   end
 
   def create
+    @event = Event.new(event_params)
+    
     if params[:act] == 'group'
 
-      # イベントに対する候補日時を作成
-      @event = Event.new(event_params)
       # render json: @event.timeplans
       
       @event.timeplans.each do |tp|
@@ -77,13 +77,15 @@ class EventsController < ApplicationController
         end
 
       end
-      @event.save
 
     else
-      @login_user.events.create(event_params)
+      @event.users << @login_user
+
+      # @login_user.events.create(event_params)
 
     end
-    redirect_to @event
+    @event.save
+    respond_with(@event)
   end
 
   def update

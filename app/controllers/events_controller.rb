@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :deside]
   before_action :set_login_user, only: [:index, :host, :gest, :show, :new, :create]
 
   respond_to :html
@@ -18,6 +18,7 @@ class EventsController < ApplicationController
   end
 
   def show
+    # イベント未確定の場合
     if @event.color = 'yellow'
       # イベントに関するプラン取得
       @timeplans = @event.timeplans
@@ -82,12 +83,39 @@ class EventsController < ApplicationController
       @login_user.events.create(event_params)
 
     end
-    respond_with(@event, location: calendar_index_path)
+    redirect_to @event
   end
 
   def update
     @event.update(event_params)
-    respond_with(@event)
+    respond_with(@event) 
+  end
+
+  def deside
+    # 確定したプランを取得
+    tp = Timeplan.find(params[:tp_id])
+    @event.transaction do
+      # 開始と終了とカラーを更新
+      @event.update(start: tp.start, end: tp.end, color: 'green')
+      # イベント情報を更新
+      @event.update(event_params)
+
+      # 参加できるユーザーを登録
+      tp.entries.each do |ent|
+        if ent.attendance == true
+          @event.users << ent.user
+        end
+      end
+      # イベントに関連するtimeplansレコードとentriesレコードを削除
+      @event.timeplans.each do |tp2|
+        tp2.entries.destroy_all
+        tp2.destroy
+      end
+      # raise '例外'
+      redirect_to @event
+    end
+  rescue => e
+    render text: e.message
   end
 
   def destroy

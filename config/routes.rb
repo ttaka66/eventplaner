@@ -5,6 +5,9 @@ Rails.application.routes.draw do
       get :host
       get :gest
     end
+    member do
+      post :deside
+    end
   end
 
   resources :entries

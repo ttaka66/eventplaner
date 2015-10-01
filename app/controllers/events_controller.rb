@@ -20,6 +20,8 @@ class EventsController < ApplicationController
   def show
     # イベント未確定の場合
     if @event.color == 'yellow'
+      # 主催者名を取得
+      @orner_name = User.find(@event.orner).username
       # イベントに関するプラン取得
       @timeplans = @event.timeplans
 

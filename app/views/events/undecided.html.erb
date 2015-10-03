@@ -2,16 +2,45 @@
 
 	<h1><%= @event.title %></h1>
 	<dl>
-		<dt>主催者：</dt>
+		<dt><%= t('orner') %></dt>
 		<dd><%= @orner_name %></dd>
-	</dl>
-
-	<dl id="message">
-		<dt>メッセージ</dt>
+		<dt><%= t('message') %></dt>
 		<dd><%= @event.message %></dd>
 	</dl>
 
+	<% if @event.place.empty? %>
+	
+	<dl>
+		<dt><%= t('place') %></dt>
+		<dd><%= t('undecided') %></dd>
+	</dl>
+
+	<% else %>
+
+	<div class="row" style="margin-bottom:40px;">
+		<div class="col-md-8">
+			<!-- 地図を表示 -->
+			<div id='map_info' data-json='<%= @hash %>'>
+				<div id="map" style='height: 400px;'></div>
+			</div>
+		</div>
+
+		<div id="place_info" class="col-md-4">
+			<dl>
+				<dt><%= t('place') %></dt>
+				<dd><%= @event.place %></dd>
+				<dt><%= t('cost') %></dt>
+				<dd><%= @event.cost %>円</dd>
+			</dl>
+		</div>
+	</div>
+	
+	<% end %>
+
 </div>
+
+
+
 
 <% i = 1 %>
 <% @timeplans.each do |tp| %>

@@ -58,3 +58,6 @@ group :development, :test do
   gem 'pry-doc'    # methodを表示
   gem 'pry-byebug' # デバッグを実施
 end
+
+gem "gmaps4rails" #GoogleMapを表示する為のgem
+gem "geocoder"

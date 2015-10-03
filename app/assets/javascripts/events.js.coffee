@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-change_botton = ->
+show = ->
 	# $('.can').click ->
 	# 	alert "hello"
 	# 	return
@@ -21,8 +21,19 @@ change_botton = ->
 		$(this).removeClass("btn-success").addClass("btn-danger").text("参加できません")
 		return
 
+	# return
+
+	handler = Gmaps.build('Google')
+	handler.buildMap { provider: {}, internal: {id: 'map'}}, ->
+		map_info = $('#map_info').data('json')
+		markers = handler.addMarkers(map_info)
+		handler.bounds.extendWith(markers)
+		handler.fitMapToBounds()
+		handler.getMap().setZoom(15)
+		return
+
 	return
 
 # ページロード時にinit関数を実行
-$(document).ready(change_botton)
-$(document).on('page:change', change_botton)
+$(document).ready(show)
+$(document).on('page:change', show)

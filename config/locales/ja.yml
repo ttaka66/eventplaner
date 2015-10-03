@@ -213,6 +213,7 @@ ja:
   change profile: 'プロフィール変更'
   log out: 'ログアウト'
 
+  # eventsコントローラー
   add event: 'イベントを追加'
   invitate event: 'イベントに招待'
   date and time candidate: '候補日時'
@@ -233,3 +234,7 @@ ja:
   do you want to cancel ?: 'キャンセルしますか?'
   Yes I do: 'はい'
   deside: '決定する'
+  orner: '主催者'
+  place: '場所'
+  cost: '費用'
+  undecided: '未定'

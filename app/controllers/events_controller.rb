@@ -18,6 +18,17 @@ class EventsController < ApplicationController
   end
 
   def show
+    # @events = Event.all
+    @hash = Gmaps4rails.build_markers(@event) do |event, marker|
+      marker.lat event.latitude
+      marker.lng event.longitude
+      marker.infowindow event.place
+      marker.json({title: event.title})
+    end
+    @hash = @hash.to_json
+
+    # render json: @hash and return
+
     # イベント未確定の場合
     if @event.color == 'yellow'
       # 主催者名を取得

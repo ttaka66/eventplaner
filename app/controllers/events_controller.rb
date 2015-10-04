@@ -18,7 +18,9 @@ class EventsController < ApplicationController
   end
 
   def show
-    # @events = Event.all
+    # 主催者名を取得
+    @orner_name = User.find(@event.orner).username
+    # GoogleMapの表示
     @hash = Gmaps4rails.build_markers(@event) do |event, marker|
       marker.lat event.latitude
       marker.lng event.longitude
@@ -31,8 +33,6 @@ class EventsController < ApplicationController
 
     # イベント未確定の場合
     if @event.color == 'yellow'
-      # 主催者名を取得
-      @orner_name = User.find(@event.orner).username
       # イベントに関するプラン取得
       @timeplans = @event.timeplans
 
@@ -48,7 +48,7 @@ class EventsController < ApplicationController
         tp.my_entry = entry
 
       end
-      render 'undecided' and return
+
     end
     respond_with(@event)
   end
@@ -139,29 +139,29 @@ class EventsController < ApplicationController
   end
 
   private
-    def set_event
-      @event = Event.find(params[:id])
-    end
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
-    def event_params
-      params.require(:event).permit(
-        :title,
-        :message,
-        :start,
-        :end,
-        :color,
-        :orner,
-        :allday,
-        :category,
-        :place,
-        :address,
-        :cost,
-        :password,
-        timeplans_attributes: [:start, :end]
-        )
-    end
+  def event_params
+    params.require(:event).permit(
+      :title,
+      :message,
+      :start,
+      :end,
+      :color,
+      :orner,
+      :allday,
+      :category,
+      :place,
+      :address,
+      :cost,
+      :password,
+      timeplans_attributes: [:start, :end]
+      )
+  end
 
-    def set_login_user
-      @login_user = User.find(current_user.id)
-    end
+  def set_login_user
+    @login_user = User.find(current_user.id)
+  end
 end

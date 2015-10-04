@@ -1,0 +1,14 @@
+<div class="participant">
+	<table class="table">
+		<tr>
+			<th><%= t('participant') %></th>
+		</tr>
+
+		<% @event.users.each do |u| %>
+		<tr>
+			<td><%= u.username %></td>
+		</tr>
+		<% end %>
+
+	</table>
+</div>

@@ -1,64 +1,55 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @event.title %>
-</p>
+<div class="event_info">
 
-<p>
-  <strong>Message:</strong>
-  <%= @event.message %>
-</p>
+  <h1><%= @event.title %></h1>
+  <dl>
+    <dt><%= t('orner') %></dt>
+    <dd><%= @orner_name %></dd>
+    <dt><%= t('message') %></dt>
+    <dd><%= @event.message %></dd>
+  </dl>
 
-<p>
-  <strong>Start:</strong>
-  <%= @event.start %>
-</p>
+  <% if @event.place.empty? %>
+  
+  <dl>
+    <dt><%= t('place') %></dt>
+    <dd><%= t('undecided') %></dd>
+  </dl>
 
-<p>
-  <strong>End:</strong>
-  <%= @event.end %>
-</p>
+  <% else %>
 
-<p>
-  <strong>Color:</strong>
-  <%= @event.color %>
-</p>
+  <div class="row" style="margin-bottom:40px;">
+    <div class="col-md-8">
+      <!-- 地図を表示 -->
+      <div id='map_info' data-json='<%= @hash %>'>
+        <div id="map" style='height: 400px;'></div>
+      </div>
+    </div>
 
-<p>
-  <strong>Orner:</strong>
-  <%= @event.orner %>
-</p>
+    <div id="place_info" class="col-md-4">
+      <dl>
+        <dt><%= t('place') %></dt>
+        <dd><%= @event.place %></dd>
+        <dt><%= t('cost') %></dt>
+        <dd><%= @event.cost %>円</dd>
+      </dl>
+    </div>
+  </div>
+  
+  <% end %>
 
-<p>
-  <strong>Allday:</strong>
-  <%= @event.allday %>
-</p>
+</div>
 
-<p>
-  <strong>Category:</strong>
-  <%= @event.category %>
-</p>
+<% if @event.color == 'yellow' %>
 
-<p>
-  <strong>Place:</strong>
-  <%= @event.place %>
-</p>
+<%= render 'undecided' %>
 
-<p>
-  <strong>Address:</strong>
-  <%= @event.address %>
-</p>
+<% else %>
 
-<p>
-  <strong>Cost:</strong>
-  <%= @event.cost %>
-</p>
+<%= render 'decided' %>
 
-<p>
-  <strong>Password:</strong>
-  <%= @event.password %>
-</p>
+<% end %>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

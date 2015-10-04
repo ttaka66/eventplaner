@@ -3,21 +3,53 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .event_info{
-	text-align: center;
 	border-bottom: solid 1px;
-
-}
-
-#place_info{
-	text-align: left;
+	h1{
+		text-align: center;
+	}
+	dl{
+		font-size: 20px;
+		dd{
+			margin-bottom: 10px;
+		}
+	}
+	#place_info{
+		text-align: left;
+	}
 }
 
 .time_candidate{
 	border-bottom: solid 1px;
 	padding: 20px 0;
+	h2{
+		text-align: center;
+	}
+	dl{
+		font-size: 20px;
+		dd{
+			margin-bottom: 10px;
+		}
+	}
+	button{
+		margin-bottom: 10px;
+	}
+	#cnt{
+		font-size: 16px;
+	}
+	table{
+		font-size: 20px;
+		td{
+			font-size: 20px;
+		}
+	}
 }
 
-.datetime{
-	/*text-align: center;*/
+.participant{
+	font-size: 20px;
+	th{
+		text-align: center;
+	}
+	td{
+		font-size: 20px;
+	}
 }
-

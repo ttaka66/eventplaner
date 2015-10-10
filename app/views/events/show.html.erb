@@ -1,55 +1,98 @@
 <p id="notice"><%= notice %></p>
 
-<div class="event_info">
+<h1><%= @event.title %></h1>
 
-  <h1><%= @event.title %></h1>
-  <dl>
-    <dt><%= t('orner') %></dt>
-    <dd><%= @orner_name %></dd>
-    <dt><%= t('message') %></dt>
-    <dd><%= @event.message %></dd>
-  </dl>
+<div class="row">
+  <div class="col-md-8">
 
-  <% if @event.place.empty? %>
-  
-  <dl>
-    <dt><%= t('place') %></dt>
-    <dd><%= t('undecided') %></dd>
-  </dl>
+    <div class="event_info">
 
-  <% else %>
+      <dl>
+        <dt><%= t('orner') %></dt>
+        <dd><%= @orner_name %></dd>
+        <dt><%= t('message') %></dt>
+        <dd><%= @event.message %></dd>
+      </dl>
 
-  <div class="row" style="margin-bottom:40px;">
-    <div class="col-md-8">
-      <!-- 地図を表示 -->
-      <div id='map_info' data-json='<%= @hash %>'>
-        <div id="map" style='height: 400px;'></div>
-      </div>
-    </div>
+      <% if @event.place.empty? %>
 
-    <div id="place_info" class="col-md-4">
       <dl>
         <dt><%= t('place') %></dt>
-        <dd><%= @event.place %></dd>
-        <dt><%= t('cost') %></dt>
-        <dd><%= @event.cost %>円</dd>
+        <dd><%= t('undecided') %></dd>
       </dl>
+
+      <% else %>
+
+      <div class="row" style="margin-bottom:40px;">
+        <div class="col-md-8">
+          <!-- 地図を表示 -->
+          <div id='map_info' data-json='<%= @hash %>'>
+            <div id="map" style='height: 400px;'></div>
+          </div>
+        </div>
+
+        <div id="place_info" class="col-md-4">
+          <dl>
+            <dt><%= t('place') %></dt>
+            <dd><%= @event.place %></dd>
+            <dt><%= t('cost') %></dt>
+            <dd><%= @event.cost %>円</dd>
+          </dl>
+        </div>
+      </div>
+
+      <% end %>
+
     </div>
+
+    <% if @event.color == 'yellow' %>
+
+    <%= render 'undecided' %>
+
+    <% else %>
+
+    <%= render 'decided' %>
+
+    <% end %>
+
   </div>
-  
-  <% end %>
+
+  <div class="col-md-4">
+
+  <div class="chat">
+
+    <!-- <ul class="list-group"> -->
+    <!-- <li class="list-group-item"> -->
+
+    <ul class="media-list">
+
+    <% @comments.each do |c| %>
+
+      <li class="media">
+          <a href="#" class="pull-left">
+          <%= image_tag 'Argentina.png', width: 64, height: 64 %>
+          </a>
+        <div class="media-body">
+          <h4 class="media-heading"><%= c.user.username %></h4>
+          <%= c.body %>
+        </div>
+      </li>
+
+    <% end %>
+    </ul>
+
+  </div>
+
+      <!-- </li>
+      <li class="list-group-item">Dapibus ac facilisis in</li>
+      <li class="list-group-item">Morbi leo risus</li>
+      <li class="list-group-item">Porta ac consectetur ac</li>
+      <li class="list-group-item">Vestibulum at eros</li>
+    </ul> -->
+
+  </div>
 
 </div>
-
-<% if @event.color == 'yellow' %>
-
-<%= render 'undecided' %>
-
-<% else %>
-
-<%= render 'decided' %>
-
-<% end %>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

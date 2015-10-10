@@ -2,11 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.event_info{
-	border-bottom: solid 1px;
-	h1{
+h1{
 		text-align: center;
 	}
+
+.event_info{
+	border-bottom: solid 1px;
 	dl{
 		font-size: 20px;
 		dd{
@@ -52,4 +53,8 @@
 	td{
 		font-size: 20px;
 	}
+}
+
+.chat{
+	
 }

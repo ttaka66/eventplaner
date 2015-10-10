@@ -61,3 +61,5 @@ end
 
 gem "gmaps4rails" #GoogleMapを表示する為のgem
 gem "geocoder"
+
+gem "websocket-rails" #websocket通信を利用するためのgem

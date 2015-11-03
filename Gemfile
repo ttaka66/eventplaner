@@ -20,7 +20,7 @@ gem 'momentjs-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+# gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -59,7 +59,10 @@ group :development, :test do
   gem 'pry-byebug' # デバッグを実施
 end
 
-gem "gmaps4rails" #GoogleMapを表示する為のgem
-gem "geocoder"
+gem 'gmaps4rails' #GoogleMapを表示する為のgem
+gem 'geocoder'
 
-gem "websocket-rails" #websocket通信を利用するためのgem
+gem 'websocket-rails' #websocket通信を利用するためのgem
+
+gem 'kaminari' #ペ−ジネーションのためのgem
+gem 'kaminari-bootstrap' #kaminariのviewをbootstrap用にカスタマイズするためのgem

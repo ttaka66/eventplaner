@@ -29,7 +29,9 @@ class EventsController < ApplicationController
     end
     @hash = @hash.to_json
 
-    @comments = @event.comments.order(created_at: :desc)
+    @comment = Comment.new
+    @comments = @event.comments.page(params[:comment_page]).per(5).
+      order(created_at: :desc)
 
     # render json: @hash and return
 

@@ -37,5 +37,8 @@ Rails.application.configure do
 
   # deviseの設定
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
+
+  # websocketの設定
+  config.middleware.delete Rack::Lock
   
 end

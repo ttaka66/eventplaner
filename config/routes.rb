@@ -1,19 +1,19 @@
 Rails.application.routes.draw do
 
   resources :events do
+    resources :comments, shallow: true
     collection do
       get :host
       get :gest
     end
     member do
-      get :comment_page
       post :deside
     end
   end
 
   resources :entries
 
-  resources :comments
+  
 
   get 'calendar/index'
 

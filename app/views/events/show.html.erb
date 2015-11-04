@@ -64,7 +64,7 @@
       <!-- <ul class="list-group"> -->
       <!-- <li class="list-group-item"> -->
 
-      <%= form_for @comment, class: "form-horizontal", remote: true, role: "form" do |f| %>
+      <%= form_for @comment, url: event_comments_path(@event), class: "form-horizontal", remote: true, role: "form" do |f| %>
 
         <%= f.hidden_field :user_id, value: current_user.id %>
         <%= f.hidden_field :event_id, value: @event.id %>
@@ -80,30 +80,9 @@
 
       <!-- <input type="button" class="btn btn-primary" id="send" value="送信"/> -->
       <div id="chat_area">
+
+        <%= render 'comments/comments_view' %>
         
-        <ul class="media-list list-group" id="chat_view">
-
-          <% @comments.each do |c| %>
-
-          <li class="media list-group-item">
-            <a href="#" class="pull-left">
-              <%= image_tag 'Argentina.png', width: 64, height: 64, class: "img-rounded" %>
-            </a>
-            <div class="media-body">
-              <h4 class="media-heading"><%= c.user.username %></h4>
-              <p><%= c.body %></p>
-              <p style="text-align:right;"><%= l(c.created_at, format: :short) %></p>
-            </div>
-          </li>
-
-          <% end %>
-        </ul>
-
-        <div class="text-center">
-        <%= paginate @comments, window: 0, param_name: :comment_page,
-          params: {controller: 'events', action: 'comment_page'}, remote: true %>
-        </div>
-
       </div>
 
     </div>

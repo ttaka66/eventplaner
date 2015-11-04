@@ -142,11 +142,6 @@ class EventsController < ApplicationController
     respond_with(@event)
   end
 
-  def comment_page
-    @comments = @event.comments.page(params[:comment_page]).per(5).
-      order(created_at: :desc)
-  end
-
   private
   def set_event
     @event = Event.find(params[:id])

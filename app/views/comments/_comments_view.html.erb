@@ -1,0 +1,22 @@
+<ul class="media-list list-group" id="chat_view">
+
+  <% @comments.each do |c| %>
+
+  <li class="media list-group-item">
+    <a href="#" class="pull-left">
+      <%= image_tag 'Argentina.png', width: 64, height: 64, class: "img-rounded" %>
+    </a>
+    <div class="media-body">
+      <h4 class="media-heading"><%= c.user.username %></h4>
+      <p><%= c.body %></p>
+      <p style="text-align:right;"><%= l(c.created_at, format: :short) %></p>
+    </div>
+  </li>
+
+  <% end %>
+</ul>
+
+<div class="text-center">
+  <%= paginate @comments, window: 0, param_name: :comment_page,
+  params: {controller: 'comments', action: 'index', event_id: @event}, remote: true %>
+</div>

@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :deside]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :deside, :comment_page]
   before_action :set_login_user, only: [:index, :host, :gest, :show, :new, :create]
 
   respond_to :html
@@ -140,6 +140,11 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_with(@event)
+  end
+
+  def comment_page
+    @comments = @event.comments.page(params[:comment_page]).per(5).
+      order(created_at: :desc)
   end
 
   private

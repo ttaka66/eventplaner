@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get :gest
     end
     member do
+      get :comment_page
       post :deside
     end
   end

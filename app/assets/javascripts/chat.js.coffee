@@ -43,11 +43,11 @@ class @ChatClass
     a = $('<a>').addClass('pull-left')
     img =$('<img>').attr('src', '/assets/Argentina.png').attr('alt', 'Argentina')
     .attr('width', 64).attr('height', 64)
-    li = $('<li>').addClass('media list-group-item')
+    li = $('<li>').addClass('media list-group-item pink')
 
 
     
-    div = div.text(data.body).prepend(h4)
+    div = div.html("<p>#{data.body}</p><p style='text-align:right;'>#{}</p>").prepend(h4)
     a = a.prepend(img)
     li = li.append(a).append(div)
     console.log(li)

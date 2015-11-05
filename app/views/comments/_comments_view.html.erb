@@ -2,7 +2,7 @@
 
   <% @comments.each do |c| %>
 
-  <li class="media list-group-item">
+  <li class="media list-group-item <%= 'green' if c.user == current_user %>">
     <a href="#" class="pull-left">
       <%= image_tag 'Argentina.png', width: 64, height: 64, class: "img-rounded" %>
     </a>

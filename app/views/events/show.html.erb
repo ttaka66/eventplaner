@@ -59,10 +59,7 @@
 
   <div class="col-md-4">
 
-    <div id="chat" data-event="<%= @event.id %>" data-username="<%= @login_user.username %>">
-
-      <!-- <ul class="list-group"> -->
-      <!-- <li class="list-group-item"> -->
+    <div id="chat" data-event="<%= @event.id %>" data-username="<%= current_user.username %>">
 
       <%= form_for @comment, url: event_comments_path(@event), class: "form-horizontal", remote: true, role: "form" do |f| %>
 
@@ -78,7 +75,6 @@
 
       <% end %>
 
-      <!-- <input type="button" class="btn btn-primary" id="send" value="送信"/> -->
       <div id="chat_area">
 
         <%= render 'comments/comments_view' %>

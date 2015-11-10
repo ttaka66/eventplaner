@@ -103,10 +103,22 @@
 	</div><!-- /.login_view -->
 	<% end %>
 
-	<p class="notice"><%= notice %></p>
-	<p class="alert"><%= alert %></p>
+	<div class="container main">
 
-	<div class="container">
+		<% if flash[:notice] %>
+			<div class="alert alert-success">
+				<%= flash[:notice] %>
+			</div>
+		<% end %>
+
+		<% if flash[:alert] %>
+			<div class="alert alert-danger">
+				<%= flash[:alert] %>
+			</div>
+		<% end %>
+
+		<div class="add_alert"></div>
+
 		<%= yield %>
 	</div>
 

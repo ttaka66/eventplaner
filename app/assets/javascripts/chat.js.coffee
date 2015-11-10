@@ -34,7 +34,15 @@ class @ChatClass
  
   receiveNotification: (data) =>
     console.log 'new comment received'
-    alert("#{data.name}さんからメッセージを受信しました")
+    # $('.alert').fadeIn(1000).delay(2000).fadeOut(2000)
+    new_alert = $('<div>').addClass('alert alert-info alert-dismissible')
+    delete_button = $('<button>').addClass('close').attr({
+        'type': 'button',
+        'data-dismiss': "alert",
+        'aria-label': "閉じる"
+      }).append($('<span>').attr('aria-hidden','true').text('×'))
+    new_alert.append(delete_button).append("#{data.name}さんからメッセージが送られました")
+    $('.add_alert').append(new_alert)
     $('#chat_area').load("/events/#{@event_id}/comments")
 
 

@@ -101,6 +101,7 @@ class EventsController < ApplicationController
       # @login_user.events.create(event_params)
 
     end
+    flash[:notice] = '新しいイベント'
     @event.save
     respond_with(@event)
   end

@@ -13,9 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require turbolinks
 //= require moment
 //= require fullcalendar
 //= require underscore
 //= require gmaps/google
-//= require_tree .
+//= require bootstrap
+//= require calendar
+//= require events
+//= require websocket_rails/main
+

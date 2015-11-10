@@ -20,7 +20,7 @@ gem 'momentjs-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+# gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -57,7 +57,28 @@ group :development, :test do
   gem 'pry-rails'  # rails console(もしくは、rails c)でirbの代わりにpryを使われる
   gem 'pry-doc'    # methodを表示
   gem 'pry-byebug' # デバッグを実施
+
+  gem 'better_errors' # エラーを見やすく表示
+  gem 'binding_of_caller' # 例外が発生した際に変数の内容を出力する為のgem
+
+  gem 'rspec-rails' # Rails専用の機能を追加するRSpecのラッパーライブラリ
+  gem 'factory_girl_rails' # フィクスチャをファクトリで置き換える為のgem
+  gem 'guard-rspec' # テストの自動実行の為のgem
 end
 
-gem "gmaps4rails" #GoogleMapを表示する為のgem
-gem "geocoder"
+group :test do
+	gem 'faker' # 名前やメールアドレスなどのプレースホルダをファクトリに追加
+	gem 'capybara' # Webアプリケーションのやりとりをプログラム上でシュミレートするためのgem
+	gem 'database_cleaner' # テストデータベースを掃除する為のgem
+	gem 'launchy' # 好きなタイミングでデフォルトのwebブラウザを開く為のgem
+	gem 'selenium-webdriver' # ブラウザ上でJavaScriptを利用する機能をcapybaraでテストする為のgem
+	gem 'shoulda-matchers' # 便利なマッチャを使う為のgem
+end
+
+gem 'gmaps4rails' #GoogleMapを表示する為のgem
+gem 'geocoder'
+
+gem 'websocket-rails' #websocket通信を利用するためのgem
+
+gem 'kaminari' #ペ−ジネーションのためのgem
+gem 'kaminari-bootstrap' #kaminariのviewをbootstrap用にカスタマイズするためのgem

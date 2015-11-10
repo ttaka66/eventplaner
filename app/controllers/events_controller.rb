@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :deside]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :deside, :comment_page]
   before_action :set_login_user, only: [:index, :host, :gest, :show, :new, :create]
 
   respond_to :html
@@ -29,7 +29,9 @@ class EventsController < ApplicationController
     end
     @hash = @hash.to_json
 
-    @comments = @event.comments.order(created_at: :desc)
+    @comment = Comment.new
+    @comments = @event.comments.page(params[:comment_page]).per(5).
+      order(created_at: :desc)
 
     # render json: @hash and return
 
@@ -99,6 +101,7 @@ class EventsController < ApplicationController
       # @login_user.events.create(event_params)
 
     end
+    flash[:notice] = '新しいイベント'
     @event.save
     respond_with(@event)
   end

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resources :events do
+    resources :comments, shallow: true
     collection do
       get :host
       get :gest
@@ -11,6 +12,8 @@ Rails.application.routes.draw do
   end
 
   resources :entries
+
+  
 
   get 'calendar/index'
 

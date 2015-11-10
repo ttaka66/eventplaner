@@ -59,40 +59,35 @@
 
   <div class="col-md-4">
 
-  <div class="chat">
+    <div id="chat" data-event="<%= @event.id %>" data-username="<%= current_user.username %>">
 
-    <!-- <ul class="list-group"> -->
-    <!-- <li class="list-group-item"> -->
+      <%= form_for @comment, url: event_comments_path(@event), class: "form-horizontal", remote: true, role: "form" do |f| %>
 
-    <ul class="media-list">
-
-    <% @comments.each do |c| %>
-
-      <li class="media">
-          <a href="#" class="pull-left">
-          <%= image_tag 'Argentina.png', width: 64, height: 64 %>
-          </a>
-        <div class="media-body">
-          <h4 class="media-heading"><%= c.user.username %></h4>
-          <%= c.body %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.hidden_field :event_id, value: @event.id %>
+        <div class="form-group">
+          <%= f.text_area :body, placeholder: t('write comment'), id: "msgbody", class: 'form-control' %>
         </div>
-      </li>
+        
+        <div class="text-center">
+          <%= f.submit class: "btn btn-primary", id: "send", value: "送信"%>
+        </div>
 
-    <% end %>
-    </ul>
+      <% end %>
 
-  </div>
+      <div id="chat_area">
 
-      <!-- </li>
-      <li class="list-group-item">Dapibus ac facilisis in</li>
-      <li class="list-group-item">Morbi leo risus</li>
-      <li class="list-group-item">Porta ac consectetur ac</li>
-      <li class="list-group-item">Vestibulum at eros</li>
-    </ul> -->
+        <%= render 'comments/comments_view' %>
+        
+      </div>
+
+    </div>
 
   </div>
 
 </div>
+
+<%= javascript_include_tag 'chat' %>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

@@ -59,7 +59,7 @@
 
   <div class="col-md-4">
 
-    <div id="chat" data-event="<%= @event.id %>" data-username="<%= current_user.username %>">
+    <div id="chat" data-event="<%= @event.id %>" data-username="<%= current_user.username %>" data-uri="<%= request.host_with_port %>">
 
       <%= form_for @comment, url: event_comments_path(@event), class: "form-horizontal", remote: true, role: "form" do |f| %>
 

@@ -51,4 +51,5 @@ class @ChatClass
     console.log('WebSocket接続を終了しました')
 
 $ ->
-  window.chatClass = new ChatClass("localhost:3000/websocket", true)
+  console.log('起動確認')
+  window.chatClass = new ChatClass("#{$('#chat').data('uri')}/websocket", true)

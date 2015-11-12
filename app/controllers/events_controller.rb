@@ -1,25 +1,22 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy, :deside, :comment_page]
-  before_action :set_login_user, only: [:index, :host, :gest, :show, :new, :create]
 
   respond_to :html
 
   def index
-    @events = @login_user.events
+    @events = current_user.events
     # respond_with(@events)
   end
 
   def host
-    @events = Event.where(orner: @login_user.id).order(created_at: :desc)
+    @events = Event.where(owner: current_user).order(created_at: :desc)
   end
 
   def gest
-    @plans = @login_user.timeplans.select(:event_id).distinct
+    @plans = current_user.timeplans.select(:event_id).distinct
   end
 
   def show
-    # 主催者名を取得
-    @orner_name = User.find(@event.orner).username
     # GoogleMapの表示
     @hash = Gmaps4rails.build_markers(@event) do |event, marker|
       marker.lat event.latitude
@@ -82,7 +79,7 @@ class EventsController < ApplicationController
       
       @event.timeplans.each do |tp|
         # 自分を候補日時に関連させる
-        tp.users << @login_user
+        tp.users << current_user
 
         # 招待メンバーのユーザー名を取得
         params['invitees'].each do |inv|
@@ -96,9 +93,9 @@ class EventsController < ApplicationController
       end
 
     else
-      @event.users << @login_user
+      @event.users << current_user
 
-      # @login_user.events.create(event_params)
+      # current_user.events.create(event_params)
 
     end
     flash[:notice] = '新しいイベント'
@@ -166,7 +163,4 @@ class EventsController < ApplicationController
       )
   end
 
-  def set_login_user
-    @login_user = User.find(current_user.id)
-  end
 end

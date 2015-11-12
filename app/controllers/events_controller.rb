@@ -18,8 +18,6 @@ class EventsController < ApplicationController
   end
 
   def show
-    # 主催者名を取得
-    @orner_name = User.find(@event.orner).username
     # GoogleMapの表示
     @hash = Gmaps4rails.build_markers(@event) do |event, marker|
       marker.lat event.latitude

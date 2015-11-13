@@ -152,7 +152,7 @@ class EventsController < ApplicationController
       :start,
       :end,
       :color,
-      :orner,
+      :owner_id,
       :allday,
       :category,
       :place,

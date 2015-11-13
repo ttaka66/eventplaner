@@ -106,7 +106,7 @@
 
 
 	<!-- 主催者の場合 -->
-	<% if @event.owner == current_user.id %>
+	<% if @event.owner == current_user %>
 
 	<!-- イベント確定の為のモーダルウィンドウ -->
 	<div id="deside<%= tp.my_entry.id %>" class="modal fade">

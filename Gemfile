@@ -71,8 +71,9 @@ group :test do
 	gem 'capybara' # Webアプリケーションのやりとりをプログラム上でシュミレートするためのgem
 	gem 'database_cleaner' # テストデータベースを掃除する為のgem
 	gem 'launchy' # 好きなタイミングでデフォルトのwebブラウザを開く為のgem
-	gem 'selenium-webdriver' # ブラウザ上でJavaScriptを利用する機能をcapybaraでテストする為のgem
+	gem 'selenium-webdriver' # ブラウザ上でJavaScriptを利用する機能をcapybaraでテストする為のgem(GUI)
 	gem 'shoulda-matchers' # 便利なマッチャを使う為のgem
+  gem 'poltergeist' # ブラウザを動かす為のgem(CUI)
 end
 
 gem 'gmaps4rails' #GoogleMapを表示する為のgem

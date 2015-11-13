@@ -106,13 +106,15 @@
 	<div class="container main">
 
 		<% if flash[:notice] %>
-			<div class="alert alert-success">
+			<div class="alert alert-success alert-dismissible">
+			<button class="close" type="button" data-dismiss="alert" area-label="閉じる">×</button>
 				<%= flash[:notice] %>
 			</div>
 		<% end %>
 
 		<% if flash[:alert] %>
-			<div class="alert alert-danger">
+			<div class="alert alert-danger alert-dismissible">
+			<button class="close" type="button" data-dismiss="alert" area-label="閉じる">×</button>
 				<%= flash[:alert] %>
 			</div>
 		<% end %>

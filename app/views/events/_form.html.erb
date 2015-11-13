@@ -91,7 +91,7 @@
       <%= f.label :password %><br>
       <%= f.password_field :password %>
     </div>
-    <%= f.hidden_field :orner, value: @login_user.id %>
+    <%= f.hidden_field :owner_id, value: current_user.id %>
   <% end %>
 
   <div class="actions">

@@ -5,7 +5,7 @@
   <% if @plans.any? %>
 	  <% @plans.each do |p| %>
 	  	<!-- 主催者でない場合 -->
-	  	<% unless p.event.orner == current_user.id %>
+	  	<% unless p.event.owner_id == current_user.id %>
 	  	<%= link_to p.event.title, event_path(p.event), class: "list-group-item" %>
 	  	<% end %>
 	  <% end %>

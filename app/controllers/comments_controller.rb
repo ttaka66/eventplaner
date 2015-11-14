@@ -12,8 +12,12 @@ class CommentsController < ApplicationController
 
 	def create
 		@comment = Comment.new(comment_params)
-		@comment.save!
-		render json: @comment
+		if @comment.save
+			render json: @comment
+		else
+			render json: @comment.errors.full_messages
+		end
+		
 	end
 
 	private

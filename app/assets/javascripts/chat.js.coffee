@@ -22,33 +22,40 @@ class @ChatClass
     @channel.bind 'new_message', @receiveNotification
     return
  
-  sendNotification: (event) =>
+  sendNotification: (e, data) =>
     $('#msgbody').val('')
     console.log("ajaxSuccess")
-    object_to_send=
-      name: @send_user_name
-      channel_name: @channel.name
-    console.log(object_to_send)
-
-    @channel.trigger 'new_message', object_to_send
+    if data.id
+      object_to_send=
+        name: @send_user_name
+        channel_name: @channel.name
+      console.log(object_to_send)
+      @channel.trigger 'new_message', object_to_send
+    else
+      console.log('文字数エラー')
+      for i in data
+        showAlert i, "alert-danger"
  
   receiveNotification: (data) =>
     console.log 'new comment received'
-    # $('.alert').fadeIn(1000).delay(2000).fadeOut(2000)
-    new_alert = $('<div>').addClass('alert alert-info alert-dismissible')
-    delete_button = $('<button>').addClass('close').attr({
-        'type': 'button',
-        'data-dismiss': "alert",
-        'aria-label': "閉じる"
-      }).append($('<span>').attr('aria-hidden','true').text('×'))
-    new_alert.append(delete_button).append("#{data.name}さんからメッセージが送られました")
-    $('.add_alert').append(new_alert)
+    showAlert "#{data.name}さんからメッセージが送られました", "alert-info"
     $('#chat_area').load("/events/#{@event_id}/comments")
 
 
   disconnectWebsocket: =>
     @dispatcher.disconnect()
     console.log('WebSocket接続を終了しました')
+
+# アラートを生成して表示
+showAlert = (alert, type)->
+  new_alert = $('<div>').addClass("alert alert-dismissible #{type}")
+  delete_button = $('<button>').addClass('close').attr({
+    'type': 'button',
+    'data-dismiss': "alert",
+    'aria-label': "閉じる"
+    }).append($('<span>').attr('aria-hidden','true').text('×'))
+  new_alert.append(delete_button).append(alert)
+  $('.add_alert').append(new_alert)
 
 $ ->
   console.log('起動確認')

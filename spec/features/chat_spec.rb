@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'チャット機能' do
 
-	scenario "新しいメッセージを送信する" do
+	background do
 
 		user = create(:user)
 		event = create(:group_event)
@@ -15,19 +15,38 @@ feature 'チャット機能' do
 		click_button 'Log in'
 
 		visit event_path(event)
-
-		expect{
-			fill_in 'msgbody', with: '新しいメッセージ'
-			click_on '送信'
-		}.to change(Comment, :count).by(1)
-
-		# Websocketはpoltergeistでテストできない
-		# expect(page).to have_content "#{user.username}さんからメッセージが送られました"
-
-		expect(page).to have_content '新しいメッセージ'
-
-		
 	end
-	
+
+	context "有効な属性の場合" do
+
+		scenario "新しいメッセージを送信する" do
+
+			expect{
+				fill_in 'msgbody', with: '新しいメッセージ'
+				click_on '送信'
+				}.to change(Comment, :count).by(1)
+
+			# Websocketはpoltergeistでテストできない
+			# expect(page).to have_content "#{user.username}さんからメッセージが送られました"
+
+			expect(page).to have_content '新しいメッセージ'
+		end
+
+	end
+
+	context "無効な属性の場合" do
+
+		scenario "空白のメッセージを送信する" do
+			expect{
+				fill_in 'msgbody', with: ''
+				click_on '送信'
+				}.to change(Comment, :count).by(0)
+
+			expect(page).to have_content "Bodyを入力してください"
+
+		end
+
+	end
+
 end
 

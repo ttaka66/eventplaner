@@ -5,51 +5,56 @@
 
     <div class="event_info">
 
-      <dl>
-        <dt><%= t('owner') %></dt>
-        <dd><%= @event.owner.username %></dd>
-        <dt><%= t('message') %></dt>
-        <dd><%= @event.message %></dd>
-      </dl>
-
-      <% if @event.place.empty? %>
-
-      <dl>
-        <dt><%= t('place') %></dt>
-        <dd><%= t('undecided') %></dd>
-      </dl>
-
-      <% else %>
-
-      <div class="row" style="margin-bottom:40px;">
-        <div class="col-md-8">
-          <!-- 地図を表示 -->
-          <div id='map_info' data-json='<%= @hash %>'>
-            <div id="map" style='height: 400px;'></div>
-          </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= t('owner') %>
         </div>
-
-        <div id="place_info" class="col-md-4">
-          <dl>
-            <dt><%= t('place') %></dt>
-            <dd><%= @event.place %></dd>
-            <dt><%= t('cost') %></dt>
-            <dd><%= @event.cost %>円</dd>
-          </dl>
+        <div class="panel-body">
+          <%= @event.owner.username %>
         </div>
       </div>
 
-      <% end %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= t('message') %>
+        </div>
+        <div class="panel-body">
+          <%= @event.message %>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= t('cost') %>
+        </div>
+        <div class="panel-body">
+          <%= @event.cost.nil? ? t('undecided') : "#{@event.cost}円" %>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= t('place') %>
+        </div>
+        <div class="panel-body">
+          <%= @event.place.empty? ? t('undecided') : @event.place %>
+          <% unless @event.address.empty? %>
+            <div id='map_info' data-json='<%= @hash %>'>
+              <div id="map" style='height: 400px;'></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
 
     </div>
 
     <% if @event.color == 'yellow' %>
 
-    <%= render 'undecided' %>
+      <%= render 'undecided' %>
 
     <% else %>
 
-    <%= render 'decided' %>
+      <%= render 'decided' %>
 
     <% end %>
 
@@ -61,15 +66,15 @@
 
       <%= form_for @comment, url: event_comments_path(@event), class: "form-horizontal", remote: true, role: "form" do |f| %>
 
-        <%= f.hidden_field :user_id, value: current_user.id %>
-        <%= f.hidden_field :event_id, value: @event.id %>
-        <div class="form-group">
-          <%= f.text_area :body, placeholder: t('write comment'), id: "msgbody", class: 'form-control' %>
-        </div>
-        
-        <div class="text-center">
-          <%= f.submit class: "btn btn-primary", id: "send", value: "送信"%>
-        </div>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.hidden_field :event_id, value: @event.id %>
+      <div class="form-group">
+        <%= f.text_area :body, placeholder: t('write comment'), id: "msgbody", class: 'form-control' %>
+      </div>
+
+      <div class="text-center">
+        <%= f.submit class: "btn btn-primary", id: "send", value: "送信"%>
+      </div>
 
       <% end %>
 

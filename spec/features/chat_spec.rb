@@ -42,6 +42,7 @@ feature 'チャット機能' do
 				click_on '送信'
 				}.to change(Comment, :count).by(0)
 
+			# Websocketはpoltergeistでテストできない
 			expect(page).to have_content "Bodyを入力してください"
 
 		end

@@ -27,15 +27,6 @@ initEvents = ->
 		$(this).removeClass("btn-success").addClass("btn-danger").text("参加できません")
 		return
 
-	handler = Gmaps.build('Google')
-	handler.buildMap { provider: {}, internal: {id: 'map'}}, ->
-		map_info = $('#map_info').data('json')
-		markers = handler.addMarkers(map_info)
-		handler.bounds.extendWith(markers)
-		handler.fitMapToBounds()
-		handler.getMap().setZoom(15)
-		return
-
   success = (response) ->
   	console.log("event_confirmationイベントが発生しました: " + response.message)
   	return

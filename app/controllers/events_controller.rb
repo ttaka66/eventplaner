@@ -18,19 +18,10 @@ class EventsController < ApplicationController
 
   def show
     # GoogleMapの表示
-    @hash = Gmaps4rails.build_markers(@event) do |event, marker|
-      marker.lat event.latitude
-      marker.lng event.longitude
-      marker.infowindow event.place
-      marker.json({title: event.title})
-    end
-    @hash = @hash.to_json
 
     @comment = Comment.new
     @comments = @event.comments.page(params[:comment_page]).per(5).
       order(created_at: :desc)
-
-    # render json: @hash and return
 
     # イベント未確定の場合
     if @event.color == 'yellow'

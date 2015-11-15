@@ -15,8 +15,6 @@
 //= require twitter/bootstrap
 //= require moment
 //= require fullcalendar
-//= require underscore
-//= require gmaps/google
 //= require bootstrap
 //= require calendar
 //= require events

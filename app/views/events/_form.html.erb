@@ -1,11 +1,9 @@
-<%= form_for(@event) do |f| %>
+<%= form_for(@event, class: 'form-horizontal', role: 'form') do |f| %>
   <% if @event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
-
+    <div class="alert alert-danger">
       <ul>
-      <% @event.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
       <% end %>
       </ul>
     </div>
@@ -14,52 +12,91 @@
   <%= hidden_field_tag :act, @act %>
   <%= f.hidden_field :color, value: @act == 'group' ? 'yellow' : 'blue' %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, class: 'form-control' %>
   </div>
   
   <% if @act == 'group' %>
-    <div class="field">
+    <div class="form-group">
       <%= f.label :message %><br>
-      <%= f.text_area :message %>
+      <%= f.text_area :message, class: 'form-control', rows: "3" %>
     </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :category %><br>
+    <%= f.text_field :category, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :place %><br>
+    <%= f.text_field :place, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :address %><br>
+    <%= f.text_field :address, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :cost %><br>
+    <div class="input-group" style="width:200px;">
+    <%= f.number_field :cost, class: 'form-control' %>
+      <!-- <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount"> -->
+      <div class="input-group-addon"><%= t('yen') %></div>
+    </div>
+  </div>
+
+  <% if @act == 'group' %>
+
+    <div class="sub_title">
+      <h2><%= t("date and time") %></h2>
+    </div>
+
+    <p><%= t('number of candidates') %>
+    <%= number_field_tag :candidates, 1, size: 1, min: 1, max: 5,
+    maxlength: 1 %></p>  
+
     <% i = 1 %>
     <%= f.fields_for :timeplans do |tp| %>
-      <h3><%= t("date and time candidate") + i.to_s %></h3>
-      <div class="field">
+      <div class="form-group">
         <%= tp.label :start %><br>
         <%= tp.datetime_select :start %>
       </div>
-      <div class="field">
+      <div class="form-group">
         <%= tp.label :end %><br>
         <%= tp.datetime_select :end %>
+      </div>
+      <div class="form-group">
+        <%= f.label :allday %><br>
+        <%= f.check_box :allday %>
       </div>
       <% i += 1 %>
     <% end %>
 
   <% else %>
 
-    <div class="field">
+    <div class="form-group">
       <%= f.label :start %><br>
       <%= f.datetime_select :start %>
     </div>
-    <div class="field">
+    <div class="form-group">
       <%= f.label :end %><br>
       <%= f.datetime_select :end %>
     </div>
+    <div class="form-group">
+      <%= f.label :allday %><br>
+      <%= f.check_box :allday %>
+    </div>
 
   <% end %>
 
-  <div class="field">
-    <%= f.label :allday %><br>
-    <%= f.check_box :allday %>
-  </div>
+  
 
   <% if @act == 'group' %>
-  
-    <h3><%= t('invitees') %></h3>
-    <div class="field">
+
+    <div class="sub_title">
+      <h2><%= t('invitees') %></h2>
+    </div>
+    <div class="form-group">
       <%= text_field_tag 'invitees[]' %>
       <%= text_field_tag 'invitees[]' %>
       <%= text_field_tag 'invitees[]' %>
@@ -67,34 +104,18 @@
 
   <% end %>
 
-  <div class="field">
-    <%= f.label :category %><br>
-    <%= f.text_field :category %>
-  </div>
-  <div class="field">
-    <%= f.label :place %><br>
-    <%= f.text_field :place %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :cost %><br>
-    <%= f.number_field :cost %>
-  </div>
+  
   
 
 
   <% if @act == 'group' %>
-    <div class="field">
+    <div class="form-group">
       <%= f.label :password %><br>
-      <%= f.password_field :password %>
+      <%= f.password_field :password, class: 'form-control' %>
     </div>
     <%= f.hidden_field :owner_id, value: current_user.id %>
   <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
+  <div style="text-align:center;">
+    <%= f.submit class: 'btn btn-default', data: { disable_with: '作成中' } %>
   </div>
 <% end %>

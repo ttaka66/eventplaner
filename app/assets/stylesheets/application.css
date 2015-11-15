@@ -18,3 +18,15 @@
 .main{
 	margin-top: 60px;
 }
+
+.title{
+	padding-bottom: 9px;
+  margin: 0 0 20px;
+  border-bottom: 1px solid #9E9E9E;
+}
+
+.sub_title{
+	padding-bottom: 6px;
+  margin: 0 0 20px;
+  border-bottom: 1px solid #9E9E9E;
+}

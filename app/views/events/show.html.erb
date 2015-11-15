@@ -1,9 +1,12 @@
-<h1><%= @event.title %></h1>
+<div class="title">
+  <h1><%= @event.title %></h1>
+</div>
+
 
 <div class="row">
   <div class="col-md-8">
 
-    <div class="event_info">
+    <div id="event_info">
 
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -37,10 +40,11 @@
           <%= t('place') %>
         </div>
         <div class="panel-body">
-          <%= @event.place.empty? ? t('undecided') : @event.place %>
+          <%= @event.place.empty? ? t('undecided') : @event.place %><br>
           <% unless @event.address.empty? %>
-            <div id='map' style="width:100%;height:400px"
-            data-address="<%= @event.address %>"></div>
+          <%= @event.address %>
+          <div id='map' style="width:100%;height:400px"
+          data-address="<%= @event.address %>"></div>
           <% end %>
         </div>
       </div>
@@ -49,11 +53,11 @@
 
     <% if @event.color == 'yellow' %>
 
-      <%= render 'undecided' %>
+    <%= render 'undecided' %>
 
     <% else %>
 
-      <%= render 'decided' %>
+    <%= render 'decided' %>
 
     <% end %>
 
@@ -80,7 +84,7 @@
       <div id="chat_area">
 
         <%= render 'comments/comments_view' %>
-        
+
       </div>
 
     </div>
@@ -91,8 +95,8 @@
 
 <%= javascript_include_tag 'chat' %>
 <% unless @event.address.empty? %>
-  <script src="https://maps.googleapis.com/maps/api/js?sencor=true"></script>
-  <%= javascript_include_tag 'map' %>
+<script src="https://maps.googleapis.com/maps/api/js?sencor=true"></script>
+<%= javascript_include_tag 'map' %>
 <% end %>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |

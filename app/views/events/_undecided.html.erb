@@ -3,14 +3,27 @@
 <% i = 1 %>
 <% @timeplans.each do |tp| %>
 <div class="time_candidate">
-	<h2><%= t('date and time candidate') + i.to_s %></h2>
+	<div class="sub_title">
+		<h2><%= t('plan') + i.to_s %></h2>
+	</div>
 
-	<dl>
-		<dt><%= t('starttime') %></dt>
-		<dd><%= l(tp.start, format: :short) %></dd>
-		<dt><%= t('endtime') %></dt>
-		<dd><%= l(tp.end, format: :short) %></dd>
-	</dl>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<%= t('starttime') %>
+		</div>
+		<div class="panel-body">
+			<%= l(tp.start, format: :short) %>
+		</div>
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<%= t('endtime') %>
+		</div>
+		<div class="panel-body">
+			<%= l(tp.end, format: :short) %>
+		</div>
+	</div>
 
 	<!-- 参加・不参加変更の為のモーダルウィンドウ開始 -->
 	<div id="<%= tp.my_entry.id %>" class="modal fade">
@@ -77,7 +90,13 @@
 	<% end %><!-- end if -->
 
 	<p id="cnt"><span style="color:red;"><%= tp.attend_cnt %> </span> <%= t("people can participate") %></p>
-	<table class="table">
+
+	<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><%= t('participant list') %></div>
+
+  <!-- Table -->
+  <table class="table">
 		<tr>
 			<th><%= t('participant') %></th>
 			<th><%= t('message') %></th>
@@ -102,6 +121,8 @@
 		<% end %>
 
 	</table>
+</div>
+	
 
 
 

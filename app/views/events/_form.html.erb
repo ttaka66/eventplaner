@@ -52,8 +52,8 @@
     </div>
 
     <p><%= t('number of candidates') %>
-    <%= number_field_tag :candidates, 1, size: 1, min: 1, max: 5,
-    maxlength: 1 %></p>  
+    <%= select_tag :timeplans_cnt, options_for_select([1,2,3,4,5]), size: 1 %>
+    </p>  
 
     <% i = 1 %>
     <%= f.fields_for :timeplans do |tp| %>

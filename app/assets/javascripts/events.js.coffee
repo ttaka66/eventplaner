@@ -10,6 +10,18 @@ $ ->
 initEvents = ->
 
 	# event#new
+	$(".datetimepicker").datetimepicker({
+		# 日本語化 
+		locale: 'ja'
+		# 年月日を時間を横に並べる
+		sideBySide: true
+		# テキストフィールドの表示形式
+		format: 'YYYY/MM/DD HH:mm'
+		# カレンダーのヘッダーの表示形式
+		dayViewHeaderFormat: 'YYYY MMMM'
+		# 5分ごとに変更できる
+		stepping: 5
+		})
 
 	# 候補数が変わった時に時刻変更ボックスの数を変更する
 	$('#timeplans_cnt').change ->

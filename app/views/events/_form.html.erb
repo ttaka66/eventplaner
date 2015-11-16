@@ -57,6 +57,7 @@
 
     <% i = 1 %>
     <%= f.fields_for :timeplans do |tp| %>
+    <div id="timeplan<%= i %>">
       <div class="form-group">
         <%= tp.label :start %><br>
         <%= tp.datetime_select :start %>
@@ -70,6 +71,7 @@
         <%= f.check_box :allday %>
       </div>
       <% i += 1 %>
+    </div>
     <% end %>
 
   <% else %>
@@ -97,9 +99,9 @@
       <h2><%= t('invitees') %></h2>
     </div>
     <div class="form-group">
-      <%= text_field_tag 'invitees[]' %>
-      <%= text_field_tag 'invitees[]' %>
-      <%= text_field_tag 'invitees[]' %>
+      <%= text_field_tag 'invitees[]', '', id: "invitees1" %>
+      <%= text_field_tag 'invitees[]', '', id: "invitees2" %>
+      <%= text_field_tag 'invitees[]', '', id: "invitees3" %>
     </div>
 
   <% end %>

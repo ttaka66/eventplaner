@@ -2,6 +2,7 @@ require 'rails_helper'
 
 feature 'チャット機能' do
 
+
 	background do
 
 		user = create(:user)
@@ -26,13 +27,13 @@ feature 'チャット機能' do
 				click_on '送信'
 				}.to change(Comment, :count).by(1)
 
-			# Websocketはpoltergeistでテストできない
-			# expect(page).to have_content "#{user.username}さんからメッセージが送られました"
+				# Websocketはpoltergeistでテストできない
+				# expect(page).to have_content "#{user.username}さんからメッセージが送られました"
 
-			expect(page).to have_content '新しいメッセージ'
+				expect(page).to have_content '新しいメッセージ'
+			end
+
 		end
-
-	end
 
 	context "無効な属性の場合" do
 
@@ -50,4 +51,3 @@ feature 'チャット機能' do
 	end
 
 end
-

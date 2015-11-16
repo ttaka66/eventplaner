@@ -1,8 +1,11 @@
-<% if @act == 'group' %>
-	<h1><%= t 'invitate event' %></h1>
-<% else %>
-	<h1><%= t 'add event' %></h1>
-<% end %>
+<div class="title">
+	<% if @act == 'group' %>
+		<h1><%= t('invitate event') %></h1>
+	<% else %>
+		<h1><%= t('add event') %></h1>
+	<% end %>
+</div>
+
 
 <%= render 'form' %>
 

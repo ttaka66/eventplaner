@@ -14,9 +14,10 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require moment
+//= require bootstrap-datetimepicker
+//= require moment/ja.js
 //= require fullcalendar
 //= require bootstrap
 //= require calendar
 //= require events
 //= require websocket_rails/main
-

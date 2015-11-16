@@ -51,7 +51,7 @@ class EventsController < ApplicationController
 
     if @act == 'group'
       # @event.timeplans.build
-      3.times { @event.timeplans.build }
+      2.times { @event.timeplans.build }
     end
     
     respond_with(@event)

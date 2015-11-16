@@ -6,15 +6,30 @@
 
 $ ->
 	console.log('セット')
-	# $('#chat').ready ->
- #  	alert 'hello chat'
-
 
 initEvents = ->
-	console.log('initEventsセット')
+
+	# event#new
+	$(".datetimepicker").datetimepicker({
+		# 日本語化 
+		locale: 'ja'
+		# 年月日を時間を横に並べる
+		sideBySide: true
+		# テキストフィールドの表示形式
+		format: 'YYYY/MM/DD HH:mm'
+		# カレンダーのヘッダーの表示形式
+		dayViewHeaderFormat: 'YYYY MMMM'
+		# 5分ごとに変更できる
+		stepping: 5
+		})
+
+	# 候補数が変わった時に時刻変更ボックスの数を変更する
+	$('#timeplans_cnt').change ->
+  	console.log("候補数：#{$(this).val()}")
+
 
 	$(".can").hover ->
-		$(this).removeClass("btn-success").addClass("btn-danger").text("参加できません").value("参加できません")
+		$(this).removeClass("btn-success").addClass("btn-danger").text("参加できません")
 		return
 	, ->
 		$(this).removeClass("btn-danger").addClass("btn-success").text("参加できます")
@@ -35,13 +50,6 @@ initEvents = ->
 	failure = (response) ->
   	console.log("event_confirmationイベント生成に失敗しました " + response.message)
   	return
-
-  # $('#chat').ready ->
-  # 	alert 'hello chat'
-
-  return
-
-
 
 # ページロード時にinit関数を実行
 $(document).ready(initEvents)

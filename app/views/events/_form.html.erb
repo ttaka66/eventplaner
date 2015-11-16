@@ -38,7 +38,7 @@
   </div>
   <div class="form-group">
     <%= f.label :cost %><br>
-    <div class="input-group" style="width:200px;">
+    <div class="input-group" style="width:250px;">
     <%= f.number_field :cost, class: 'form-control' %>
       <!-- <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount"> -->
       <div class="input-group-addon"><%= t('yen') %></div>
@@ -52,26 +52,39 @@
     </div>
 
     <p><%= t('number of candidates') %>
-    <%= number_field_tag :candidates, 1, size: 1, min: 1, max: 5,
-    maxlength: 1 %></p>  
+    <%= select_tag :timeplans_cnt, options_for_select([1,2,3,4,5]), size: 1 %>
+    </p>  
 
     <% i = 1 %>
     <%= f.fields_for :timeplans do |tp| %>
-    <div id="timeplan<%= i %>">
-      <div class="form-group">
+      <div id="timeplan<%= i %>">
+        <h3><%= t('plan') + i.to_s %></h3>
+        <div class="form-group">
         <%= tp.label :start %><br>
-        <%= tp.datetime_select :start %>
-      </div>
-      <div class="form-group">
-        <%= tp.label :end %><br>
-        <%= tp.datetime_select :end %>
-      </div>
-      <div class="form-group">
-        <%= f.label :allday %><br>
-        <%= f.check_box :allday %>
+          <div class="input-group date datetimepicker" style="width:250px;">
+            <%= tp.text_field :start, class: 'form-control', placeholder: 'YYYY/MM/DD HH:mm' %>
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= tp.label :end %><br>
+          <div class="input-group date datetimepicker" style="width:250px;">
+            <%= tp.text_field :end, class: 'form-control', placeholder: 'YYYY/MM/DD HH:mm' %>
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :allday %><br>
+          <%= f.check_box :allday %>
+        </div>
       </div>
       <% i += 1 %>
-    </div>
     <% end %>
 
   <% else %>
@@ -121,3 +134,24 @@
     <%= f.submit class: 'btn btn-default', data: { disable_with: '作成中' } %>
   </div>
 <% end %>
+
+<!-- <div class="container">
+    <div class="row">
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+    </div>
+</div>
+ -->

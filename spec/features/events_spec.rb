@@ -33,7 +33,7 @@ feature 'イベント' do
 					user4 = create(:user, username: 'user4')
 				end
 
-				scenario '新しいイベントを作成する' do
+				scenario '新しいイベントを作成する', js: true do
 					expect{
 						click_on 'Create group event'
 						fill_in 'タイトル', with: '野球観戦'
@@ -42,16 +42,19 @@ feature 'イベント' do
 						fill_in '場所', with: '名古屋ドーム'
 						fill_in '住所', with: '愛知県名古屋市東区大幸南１丁目１ ナゴヤドーム'
 						fill_in '費用', with: 2000
+						select 3, from: '候補数'
 						find('#timeplan1').fill_in '開始時間', with: '2017/01/01 00:00'
 						find('#timeplan1').fill_in '終了時間', with: '2017/01/01 01:00'
 						find('#timeplan2').fill_in '開始時間', with: '2017/01/02 00:00'
 						find('#timeplan2').fill_in '終了時間', with: '2017/01/02 01:00'
+						find('#timeplan3').fill_in '開始時間', with: '2017/01/03 00:00'
+						find('#timeplan3').fill_in '終了時間', with: '2017/01/03 01:00'
 						fill_in 'invitees1', with: 'user2'
 						fill_in 'invitees2', with: 'user3'
 						fill_in 'invitees3', with: 'user4'
 						click_on '登録する'
-					}.to change(Event, :count).by(1).and change(Timeplan, :count).by(2).
-					and change(Entry, :count).by(2*(3+1))
+					}.to change(Event, :count).by(1).and change(Timeplan, :count).by(3).
+					and change(Entry, :count).by(3*(3+1))
 					expect(page).to have_content '野球観戦'
 					expect(page).to have_content '参加者募集'
 					expect(page).to have_content '参加者募集'
@@ -60,6 +63,8 @@ feature 'イベント' do
 					expect(page).to have_content '17/01/01(日) 01:00'
 					expect(page).to have_content '17/01/02(月) 00:00'
 					expect(page).to have_content '17/01/02(月) 01:00'
+					expect(page).to have_content '17/01/03(火) 00:00'
+					expect(page).to have_content '17/01/03(火) 01:00'
 
 				end
 			end

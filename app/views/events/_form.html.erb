@@ -38,7 +38,7 @@
   </div>
   <div class="form-group">
     <%= f.label :cost %><br>
-    <div class="input-group" style="width:250px;">
+    <div class="input-group">
     <%= f.number_field :cost, class: 'form-control' %>
       <!-- <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount"> -->
       <div class="input-group-addon"><%= t('yen') %></div>
@@ -51,55 +51,65 @@
       <h2><%= t("date and time") %></h2>
     </div>
 
-    <p><%= t('number of candidates') %>
-    <%= select_tag :timeplans_cnt, options_for_select([1,2,3,4,5]), size: 1 %>
+    <p><%= label_tag :timeplans_cnt, t('number of candidates') %>
+    <%= select_tag :timeplans_cnt, options_for_select([1,2,3,4,5],selected: 2), size: 1 %>
     </p>  
 
-    <% i = 1 %>
-    <%= f.fields_for :timeplans do |tp| %>
-      <div id="timeplan<%= i %>">
-        <h3><%= t('plan') + i.to_s %></h3>
-        <div class="form-group">
-        <%= tp.label :start %><br>
-          <div class="input-group date datetimepicker" style="width:250px;">
-            <%= tp.text_field :start, class: 'form-control', placeholder: 'YYYY/MM/DD HH:mm' %>
-            <span class="input-group-addon">
-              <span class="glyphicon glyphicon-calendar"></span>
-            </span>
+    <div id="timeplans">
+      <% i = 1 %>
+      <%= f.fields_for :timeplans do |tp| %>
+        <div id="timeplan<%= i %>">
+          <h3><%= t('plan') + i.to_s %></h3>
+          <div class="form-group">
+          <%= tp.label :start %><br>
+            <div class="input-group date datetimepicker">
+              <%= tp.text_field :start, class: 'form-control', placeholder: 'YYYY/MM/DD HH:mm' %>
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= tp.label :end %><br>
+            <div class="input-group date datetimepicker">
+              <%= tp.text_field :end, class: 'form-control', placeholder: 'YYYY/MM/DD HH:mm' %>
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :allday %><br>
+            <%= f.check_box :allday %>
           </div>
         </div>
+        <% i += 1 %>
+      <% end %>
 
-        <div class="form-group">
-          <%= tp.label :end %><br>
-          <div class="input-group date datetimepicker" style="width:250px;">
-            <%= tp.text_field :end, class: 'form-control', placeholder: 'YYYY/MM/DD HH:mm' %>
-            <span class="input-group-addon">
-              <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :allday %><br>
-          <%= f.check_box :allday %>
-        </div>
-      </div>
-      <% i += 1 %>
-    <% end %>
+    </div>
 
   <% else %>
 
     <div class="form-group">
       <%= f.label :start %><br>
-      <%= f.datetime_select :start %>
+      <div class="input-group date datetimepicker">
+        <%= f.text_field :start, class: 'form-control', placeholder: 'YYYY/MM/DD HH:mm' %>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
     </div>
+
     <div class="form-group">
       <%= f.label :end %><br>
-      <%= f.datetime_select :end %>
-    </div>
-    <div class="form-group">
-      <%= f.label :allday %><br>
-      <%= f.check_box :allday %>
+      <div class="input-group date datetimepicker">
+        <%= f.text_field :end, class: 'form-control', placeholder: 'YYYY/MM/DD HH:mm' %>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
     </div>
 
   <% end %>
@@ -134,24 +144,3 @@
     <%= f.submit class: 'btn btn-default', data: { disable_with: '作成中' } %>
   </div>
 <% end %>
-
-<!-- <div class="container">
-    <div class="row">
-        <div class='col-sm-6'>
-            <div class="form-group">
-                <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-            });
-        </script>
-    </div>
-</div>
- -->

@@ -1,4 +1,7 @@
 class Event < ActiveRecord::Base
+	validates :title, presence: true, length:{ maximum: 50}
+	validates :color, presence: true
+	validates :owner_id, presence: true
 	has_and_belongs_to_many :users
 	belongs_to :owner, class_name: 'User'
 	has_many :timeplans

@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!, except: :show
   before_action :set_event, only: [:show, :edit, :update, :destroy, :deside, :comment_page]
 
   respond_to :html
@@ -63,11 +64,9 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    
-    if params[:act] == 'group'
+    @act = params[:act]
+    if @act == 'group'
 
-      # render json: @event.timeplans
-      
       @event.timeplans.each do |tp|
         # 自分を候補日時に関連させる
         tp.users << current_user
@@ -89,9 +88,17 @@ class EventsController < ApplicationController
       # current_user.events.create(event_params)
 
     end
-    flash[:notice] = '新しいイベント'
-    @event.save
-    respond_with(@event)
+    respond_to do |format|
+      if @event.save
+        format.html { redirect_to @event, notice: '新しいイベントが作成されました'}
+        format.json { render action: 'show', status: :created, location: @event}
+      else
+        format.html {
+          flash[:act] = @act
+          render action: 'new' }
+        format.json { render json: @event.errors, status: :unprocessable_entity}
+      end
+    end
   end
 
   def update

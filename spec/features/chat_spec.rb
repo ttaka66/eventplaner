@@ -20,7 +20,7 @@ feature 'チャット機能' do
 
 	context "有効な属性の場合" do
 
-		scenario "新しいメッセージを送信する" do
+		scenario "保存されアラート(新しいメッセージ)が表示される" do
 
 			expect{
 				fill_in 'msgbody', with: '新しいメッセージ'
@@ -37,7 +37,7 @@ feature 'チャット機能' do
 
 	context "無効な属性の場合" do
 
-		scenario "空白のメッセージを送信する" do
+		scenario "保存せずにアラート(Bodyを入力してください)が表示される" do
 			expect{
 				fill_in 'msgbody', with: ''
 				click_on '送信'

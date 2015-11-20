@@ -21,3 +21,5 @@
 //= require calendar
 //= require events
 //= require websocket_rails/main
+//= require metisMenu
+//= require sb-admin-2

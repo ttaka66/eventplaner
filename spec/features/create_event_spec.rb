@@ -46,14 +46,13 @@ feature 'イベント作成機能' do
 
 			visit root_path
 
-			click_on 'ログイン'
-			find('#login_view').fill_in 'Email', with: my_user.email
-			find('#login_view').fill_in 'パスワード', with: my_user.password
+			fill_in 'Email', with: my_user.email
+			fill_in 'パスワード', with: my_user.password
 			click_button 'Log in'
 
 			visit root_path
 
-			click_on 'Create group event'
+			click_on 'イベントに招待する'
 		end
 
 		feature 'シングルイベント' do

@@ -248,3 +248,5 @@ ja:
   yen: '円'
   date and time: '日時'
   number of candidates: '候補数'
+  delete event: 'イベントを削除する'
+  Are you sure you want to delete: '本当に削除しますか'

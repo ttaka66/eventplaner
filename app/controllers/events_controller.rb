@@ -123,12 +123,9 @@ class EventsController < ApplicationController
           end
         end
         # イベントに関連するtimeplansレコードとentriesレコードを削除
-        @event.timeplans.each do |tp2|
-          tp2.entries.destroy_all
-          tp2.destroy
-        end
+        @event.destroy_timeplans_and_entries
         # raise '例外'
-         redirect_to @event
+         redirect_to @event, notice: 'イベントが確定しました'
       end
     end
   rescue => e
@@ -136,8 +133,14 @@ class EventsController < ApplicationController
   end
 
   def destroy
+    if @event.owner_id
+      @event.transaction do
+        @event.destroy_timeplans_and_entries
+      end
+
+    end
     @event.destroy
-    respond_with(@event)
+    redirect_to root_path, notice: 'イベントを削除しました'
   end
 
   private

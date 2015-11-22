@@ -28,7 +28,7 @@ describe Event do
 		end
 		it "endがstartの前の場合無効" do
 			expect(build(:single_event,
-			start: Time.zone.local(2017, 01, 01, 01, 00, 00),
+				start: Time.zone.local(2017, 01, 01, 01, 00, 00),
 			end: Time.zone.local(2017, 01, 01, 00, 00, 00))).not_to be_valid
 		end
 	end
@@ -37,6 +37,17 @@ describe Event do
 		# it "owner_idがなければ無効" do
 		# 	expect(build(:group_event, owner_id: nil)).not_to be_valid
 		# end
+		it "イベント関連のTimeplanとEntryもすべて削除する" do
+			gev = create(:group_event)
+			2.times do
+				create(:timeplan_has_two_attendance, event: gev)
+			end
+			expect{
+				gev.destroy_timeplans_and_entries
+				}.to change(Event, :count).by(0).
+				and change(Timeplan, :count).by(-2).
+				and change(Entry, :count).by(-(2*2))
+		end
 	end
 	
 end

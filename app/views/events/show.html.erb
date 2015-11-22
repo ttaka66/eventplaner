@@ -7,24 +7,28 @@
   <div class="col-md-8">
 
     <div id="event_info">
+      <% if @event.owner %>
 
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <%= t('owner') %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <%= t('owner') %>
+          </div>
+          <div class="panel-body">
+            <%= @event.owner.username %>
+          </div>
         </div>
-        <div class="panel-body">
-          <%= @event.owner.username %>
-        </div>
-      </div>
 
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <%= t('message') %>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <%= t('message') %>
+          </div>
+          <div class="panel-body">
+            <%= @event.message %>
+          </div>
         </div>
-        <div class="panel-body">
-          <%= @event.message %>
-        </div>
-      </div>
+
+      <% end %>
 
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -65,39 +69,42 @@
 
   <div class="col-md-4">
 
-    <div id="chat" data-event="<%= @event.id %>" data-username="<%= current_user.username %>" data-uri="<%= request.host_with_port %>">
+    <% if @event.owner %>
 
-      <%= form_for @comment, url: event_comments_path(@event), class: "form-horizontal", remote: true, role: "form" do |f| %>
+      <div id="chat" data-event="<%= @event.id %>" data-username="<%= current_user.username %>" data-uri="<%= request.host_with_port %>">
 
-      <%= f.hidden_field :user_id, value: current_user.id %>
-      <%= f.hidden_field :event_id, value: @event.id %>
-      <div class="form-group">
-        <%= f.text_area :body, placeholder: t('write comment'), id: "msgbody", class: 'form-control' %>
+        <%= form_for @comment, url: event_comments_path(@event), class: "form-horizontal", remote: true, role: "form" do |f| %>
+
+          <%= f.hidden_field :user_id, value: current_user.id %>
+          <%= f.hidden_field :event_id, value: @event.id %>
+          <div class="form-group">
+            <%= f.text_area :body, placeholder: t('write comment'), id: "msgbody", class: 'form-control' %>
+          </div>
+
+          <div class="text-center">
+            <%= f.submit class: "btn btn-primary", id: "send", value: "送信",
+            data: { disable_with: '送信中' }%>
+          </div>
+
+        <% end %>
+
+        <div id="chat_area">
+
+          <%= render 'comments/comments_view' %>
+
+        </div>
+
       </div>
 
-      <div class="text-center">
-        <%= f.submit class: "btn btn-primary", id: "send", value: "送信"%>
-      </div>
+      <%= javascript_include_tag 'chat' %>
 
-      <% end %>
-
-      <div id="chat_area">
-
-        <%= render 'comments/comments_view' %>
-
-      </div>
-
-    </div>
+    <% end %>
 
   </div>
 
 </div>
 
-<%= javascript_include_tag 'chat' %>
 <% unless @event.address.empty? %>
-<script src="https://maps.googleapis.com/maps/api/js?sencor=true"></script>
-<%= javascript_include_tag 'map' %>
+  <script src="https://maps.googleapis.com/maps/api/js?sencor=true"></script>
+  <%= javascript_include_tag 'map' %>
 <% end %>
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>

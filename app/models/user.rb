@@ -11,5 +11,5 @@ class User < ActiveRecord::Base
   has_many :timeplans, through: :entries
 
   has_many :comments
-  has_many :events, through: :comments
+  # has_many :events, through: :comments
 end

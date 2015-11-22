@@ -1,14 +1,36 @@
 <div class="participant">
-	<table class="table">
-		<tr>
-			<th><%= t('participant') %></th>
-		</tr>
+	
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<%= t('starttime') %>
+		</div>
+		<div class="panel-body">
+			<%= l(@event.start, format: :short) %>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<%= t('endtime') %>
+		</div>
+		<div class="panel-body">
+			<%= l(@event.end, format: :short) %>
+		</div>
+	</div>
 
-		<% @event.users.each do |u| %>
-		<tr>
-			<td><%= u.username %></td>
-		</tr>
-		<% end %>
+	<% if @event.owner %>
+	<div class="panel panel-default">
+		<!-- Default panel contents -->
+		<div class="panel-heading"><%= "#{t('participant list')}(#{@event.users.count}#{t('people')})" %></div>
+		<table class="table">
 
-	</table>
+			<% @event.users.each do |u| %>
+			<tr>
+				<td><%= u.username %></td>
+			</tr>
+			<% end %>
+
+		</table>
+	</div>
+
+	<% end %>
 </div>

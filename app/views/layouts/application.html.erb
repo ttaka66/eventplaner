@@ -122,8 +122,9 @@
 						<li>
 							<a href="#"><%= t('show event') %><span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
-								<li><%= link_to t('hoseted event'), host_events_path %></li>
-								<li><%= link_to t('invited event'), gest_events_path %></li>
+								<li><%= link_to t('all events'), events_path %></li>
+								<li><%= link_to t('hoseted events'), host_events_path %></li>
+								<li><%= link_to t('invited events'), gest_events_path %></li>
 							</ul>
 							<!-- /.nav-second-level -->
 						</li>
@@ -144,6 +145,12 @@
 
 	<div id="main">
 		<div class="add_alert"></div>
+		<% if flash[:notice] %>
+			<div class="alert alert-success alert-dismissible">
+			<button class="close" type="button" data-dismiss="alert" area-label="閉じる">×</button>
+				<%= flash[:notice] %>
+			</div>
+		<% end %>
 		<% if flash[:alert] %>
 		<div class="alert alert-danger alert-dismissible">
 			<button class="close" type="button" data-dismiss="alert" area-label="閉じる">×</button>

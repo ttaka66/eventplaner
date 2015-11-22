@@ -92,6 +92,7 @@ class EventsController < ApplicationController
       else
         format.html {
           flash[:act] = @act
+          flash[:timeplans_cnt] = params[:timeplans_cnt]
           render action: 'new' }
         format.json { render json: @event.errors, status: :unprocessable_entity}
       end

@@ -101,7 +101,7 @@ class EventsController < ApplicationController
 
   def update
     @event.update(event_params)
-    respond_with(@event) 
+    redirect_to  @event, notice: '場所を変更しました'
   end
 
   def deside

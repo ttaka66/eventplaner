@@ -42,7 +42,7 @@
 					<% if tp.my_entry.attendance == true %>
 					<div class="form-horizontal" role="form">
 						<%= form_for(tp.my_entry) do |f| %>
-						<div class="field">
+						<div class="form-group">
 							<p style="text-align:center;"><%= t('do you want to cancel ?') %>
 							</p>
 							<%= f.hidden_field :attendance, value: false %>
@@ -56,7 +56,7 @@
 					<% else %>
 					<div class="form-horizontal" role="form">
 						<%= form_for(tp.my_entry) do |f| %>
-						<div class="field">
+						<div class="form-group">
 							<%= f.label :message, class: "control-label" %>
 							<%= f.text_area :message, class: "form-control", placeholder: "message", style: 'width: 100%;' %>
 						</div>
@@ -149,19 +149,19 @@
 						<%= form_tag deside_event_path(@event) do %>
 
 						<%= hidden_field_tag :tp_id, tp.id %>
-						<div class="field">
+						<div class="form-group">
 							<%= label :event, :place, class: "control-label" %>
 							<%= text_field :event, :place, class: "form-control", placeholder: "place" %>
 						</div>
-						<div class="field">
+						<div class="form-group">
 							<%= label :event, :address, class: "control-label" %>
 							<%= text_field :event, :address, class: "form-control", placeholder: "address" %>
 						</div>
-						<div class="field">
+						<div class="form-group">
 							<%= label :event, :cost, class: "control-label" %>
 							<%= number_field :event, :cost, class: "form-control", placeholder: "cost" %>
 						</div>
-						<div class="field">
+						<div class="form-group">
 							<%= label :event, :message, class: "control-label" %>
 							<%= text_area :event, :message, class: "form-control", placeholder: "message" %>
 						</div>

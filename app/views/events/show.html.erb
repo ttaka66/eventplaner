@@ -9,24 +9,24 @@
     <div id="event_info">
       <% if @event.owner %>
 
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <%= t('owner') %>
-          </div>
-          <div class="panel-body">
-            <%= @event.owner.username %>
-          </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= t('owner') %>
         </div>
+        <div class="panel-body">
+          <%= @event.owner.username %>
+        </div>
+      </div>
 
 
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <%= t('message') %>
-          </div>
-          <div class="panel-body">
-            <%= @event.message %>
-          </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= t('message') %>
         </div>
+        <div class="panel-body">
+          <%= @event.message %>
+        </div>
+      </div>
 
       <% end %>
 
@@ -69,45 +69,95 @@
 
   <div class="col-md-4">
 
+    <% if !@event.owner || @event.owner == current_user %>
+
+    <!-- 場所変更の為のモーダルウィンドウ開始 -->
+    <div id="change_place" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header" align="center">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">
+              <%= @event.title %><br />
+            </h4>
+          </div>
+
+          <div class="modal-body">
+
+            <div class="form-horizontal" role="form">
+              <%= form_for(@event) do |f| %>
+                <div class="form-group">
+                <%= f.label :place, class: "control-label" %>
+                  <%= f.text_field :place, class: "form-control", placeholder: "place" %>
+                </div>
+                <div class="form-group">
+                <%= f.label :address, class: "control-label" %>
+                  <%= f.text_field :address, class: "form-control", placeholder: "address" %>
+                </div>
+                <div class="form-group">
+                  <%= f.label :cost, class: "control-label" %>
+                  <%= f.number_field :cost, class: "form-control", placeholder: "cost" %>
+                </div>
+                <div style="text-align:center;">
+                  <%= f.submit value: t('change place'), class: "btn btn-primary",
+                  data: { disable_with: '送信中' } %>
+                </div>
+              <% end %>
+            </div>
+
+          </div>
+          <div class="modal-footer" align="center">
+
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div><!-- /.modal-footer -->
+
+
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /#change_place -->
+    <!-- モーダルウィンドウ終了 -->
+    <button type="button" class="btn btn-info btn-lg btn-block" data-toggle="modal" data-target="#change_place"><%= t("change place") %></button>
+
     <%= link_to t('delete event'), event_path(@event), class: 'btn btn-danger btn-lg btn-block', method: :delete, data: {confirm: t('Are you sure you want to delete')} %>
     <br>
+    <% end %>
 
     <% if @event.owner %>
+    <div id="chat" data-event="<%= @event.id %>" data-username="<%= current_user.username %>" data-uri="<%= request.host_with_port %>">
 
-      <div id="chat" data-event="<%= @event.id %>" data-username="<%= current_user.username %>" data-uri="<%= request.host_with_port %>">
+      <%= form_for @comment, url: event_comments_path(@event), class: "form-horizontal", remote: true, role: "form" do |f| %>
 
-        <%= form_for @comment, url: event_comments_path(@event), class: "form-horizontal", remote: true, role: "form" do |f| %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.hidden_field :event_id, value: @event.id %>
+      <div class="form-group">
+        <%= f.text_area :body, placeholder: t('write comment'), id: "msgbody", class: 'form-control' %>
+      </div>
 
-          <%= f.hidden_field :user_id, value: current_user.id %>
-          <%= f.hidden_field :event_id, value: @event.id %>
-          <div class="form-group">
-            <%= f.text_area :body, placeholder: t('write comment'), id: "msgbody", class: 'form-control' %>
-          </div>
+      <div class="text-center">
+        <%= f.submit class: "btn btn-primary", id: "send", value: "送信",
+        data: { disable_with: '送信中' }%>
+      </div>
 
-          <div class="text-center">
-            <%= f.submit class: "btn btn-primary", id: "send", value: "送信",
-            data: { disable_with: '送信中' }%>
-          </div>
+      <% end %>
 
-        <% end %>
+      <div id="chat_area">
 
-        <div id="chat_area">
-
-          <%= render 'comments/comments_view' %>
-
-        </div>
+        <%= render 'comments/comments_view' %>
 
       </div>
 
-      <%= javascript_include_tag 'chat' %>
+    </div>
+
+    <%= javascript_include_tag 'chat' %>
 
     <% end %>
+
 
   </div>
 
 </div>
 
 <% unless @event.address.empty? %>
-  <script src="https://maps.googleapis.com/maps/api/js?sencor=true"></script>
-  <%= javascript_include_tag 'map' %>
+<script src="https://maps.googleapis.com/maps/api/js?sencor=true"></script>
+<%= javascript_include_tag 'map' %>
 <% end %>

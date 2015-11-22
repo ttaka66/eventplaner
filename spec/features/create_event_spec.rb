@@ -93,7 +93,7 @@ feature 'イベント作成機能' do
 					expect(page).to have_content 'イベントに招待'
 				end
 				scenario '保存に失敗'do
-					expect(page).to have_select('候補数', selected: '3')
+					expect(page).to have_select('候補数', selected: '2')
 				end
 				it_behaves_like '正常な値を入力'
 			end

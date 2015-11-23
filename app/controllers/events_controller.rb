@@ -6,6 +6,8 @@ class EventsController < ApplicationController
 
   def index
     @events = current_user.events
+    # @entris = current_user.entries.where(attendance: true)
+    @entries = Entry.where(user_id: current_user.id, attendance: true)
     # respond_with(@events)
   end
 

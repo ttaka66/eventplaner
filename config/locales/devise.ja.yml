@@ -62,3 +62,16 @@ ja:
       unlock_instructions:
         subject: 'アカウントの凍結解除'
 #        subject: 'Unlock Instructions'
+
+  activerecord:
+    attributes:
+      user:
+        username: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード確認
+        remember_me: 次回からパスワード入力を省く
+
+  log in: 'ログイン'
+  sign up: '新規登録'
+  forgot your password?: 'パスワードを忘れた場合はこちら'

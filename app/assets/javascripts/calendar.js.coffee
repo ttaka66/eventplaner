@@ -30,17 +30,50 @@ init = ->
   calendar = $('#calendar').fullCalendar(
     defaultView: 'agendaWeek'
     header:
-      right: 'agendaDay agendaWeek month today prev next'
+      left: 'prev,next today',
+      center: 'title'
+      right: 'agendaDay agendaWeek month'
     events: '/events.json'
     selectable: true
     selectHelper: true
     ignoreTimezone: false
     # select: select
+    timeFormat: 'H:mm'
+    titleFormat:
+      month: 'YYYY M月'
+      week: "YYYY年M月D日"
+      day: "YYYY年M月D日[(]ddd[)]"
+    columnFormat:
+      week: "M/D[(]ddd[)]"
+    monthNames: [
+      '１月'
+      '２月'
+      '３月'
+      '４月'
+      '５月'
+      '６月'
+      '７月'
+      '８月'
+      '９月'
+      '１０月'
+      '１１月'
+      '１２月'
+    ]
+    dayNamesShort: [
+      '日'
+      '月'
+      '火'
+      '水'
+      '木'
+      '金'
+      '土'
+    ]
     buttonText:
-      today: 'Hoy'
-      month: 'month'
-      week: 'week'
-      day: 'day'
+      today: '今日'
+      month: '月'
+      week: '週'
+      day: '日'
+    axisFormat: 'H:mm'
   )
 
   return

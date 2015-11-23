@@ -213,6 +213,9 @@ ja:
   change profile: 'プロフィール変更'
   log out: 'ログアウト'
 
+  # homeコントローラー
+  calendar: 'カレンダー'
+
   # eventsコントローラー
   add event: 'イベントを追加'
   invitate event: 'イベントに招待'

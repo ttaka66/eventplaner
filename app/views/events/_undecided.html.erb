@@ -26,7 +26,7 @@
 	</div>
 
 	<!-- 参加・不参加変更の為のモーダルウィンドウ開始 -->
-	<div id="<%= tp.my_entry.id %>" class="modal fade">
+	<div id="entry_timeplan_<%= i %>" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header" align="center">
@@ -42,26 +42,28 @@
 					<% if tp.my_entry.attendance == true %>
 					<div class="form-horizontal" role="form">
 						<%= form_for(tp.my_entry) do |f| %>
-						<div class="field">
+						<div class="form-group">
 							<p style="text-align:center;"><%= t('do you want to cancel ?') %>
 							</p>
 							<%= f.hidden_field :attendance, value: false %>
 						</div>
 						<div class="action" align="center">
-							<%= f.submit value: t('Yes I do'), class: "btn btn-primary" %>
+							<%= f.submit value: t('Yes I do'), class: "btn btn-primary",
+							data: { disable_with: '送信中' } %>
 						</div>
 						<% end %>
 					</div>
 					<% else %>
 					<div class="form-horizontal" role="form">
 						<%= form_for(tp.my_entry) do |f| %>
-						<div class="field">
+						<div class="form-group">
 							<%= f.label :message, class: "control-label" %>
 							<%= f.text_area :message, class: "form-control", placeholder: "message", style: 'width: 100%;' %>
 						</div>
 						<%= f.hidden_field :attendance, value: true %>
 						<div class="action" align="center">
-							<%= f.submit value: t('I can attend'), class: "btn btn-success" %>
+							<%= f.submit value: t('I can attend'), class: "btn btn-success",
+							data: { disable_with: '送信中' } %>
 						</div>
 						<% end %>
 					</div>
@@ -81,47 +83,47 @@
 
 	<% if tp.my_entry.attendance == true %><!-- 参加できる場合 -->
 
-	<button type="button" class="btn btn-success can" data-toggle="modal" data-target="#<%= tp.my_entry.id %>"><%= t("I can attend") %></button>
+	<button type="button" class="btn btn-success can" data-toggle="modal" data-target="#entry_timeplan_<%= i %>"><%= t("I can attend") %></button>
 
 	<% else %><!-- 参加できない場合 -->
 
-	<button type="button" class="btn btn-danger cant" data-toggle="modal" data-target="#<%= tp.my_entry.id %>"><%= t("I can't attend") %></button>
+	<button type="button" class="btn btn-danger cant" data-toggle="modal" data-target="#entry_timeplan_<%= i %>"><%= t("I can't attend") %></button>
 
 	<% end %><!-- end if -->
 
 	<p id="cnt"><span style="color:red;"><%= tp.attend_cnt %> </span> <%= t("people can participate") %></p>
 
 	<div class="panel panel-default">
-  <!-- Default panel contents -->
-  <div class="panel-heading"><%= t('participant list') %></div>
+		<!-- Default panel contents -->
+		<div class="panel-heading"><%= t('participant list') %></div>
 
-  <!-- Table -->
-  <table class="table">
-		<tr>
-			<th><%= t('participant') %></th>
-			<th><%= t('message') %></th>
-		</tr>
+		<!-- Table -->
+		<table class="table">
+			<tr>
+				<th><%= t('participant') %></th>
+				<th><%= t('message') %></th>
+			</tr>
 
-		<% if tp.attend_cnt == 0 %>
+			<% if tp.attend_cnt == 0 %>
 
-		<tr>
-			<td colspan="2"><%= t('there is no attendance people') %></td>
-		</tr>
+			<tr>
+				<td colspan="2"><%= t('there is no attendance people') %></td>
+			</tr>
 
-		<% else %>
-		
-		<% tp.entries.each do |ent| %>
-		<% if ent.attendance == true %>
-		<tr>
-			<td><%= ent.user.username %></td>
-			<td><%= ent.message %></td>
-		</tr>
-		<% end %>
-		<% end %>
-		<% end %>
+			<% else %>
 
-	</table>
-</div>
+			<% tp.entries.each do |ent| %>
+			<% if ent.attendance == true %>
+			<tr>
+				<td><%= ent.user.username %></td>
+				<td><%= ent.message %></td>
+			</tr>
+			<% end %>
+			<% end %>
+			<% end %>
+
+		</table>
+	</div>
 	
 
 
@@ -130,7 +132,7 @@
 	<% if @event.owner == current_user %>
 
 	<!-- イベント確定の為のモーダルウィンドウ -->
-	<div id="deside<%= tp.my_entry.id %>" class="modal fade">
+	<div id="deside_timeplan_<%= i %>" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header" align="center">
@@ -147,24 +149,25 @@
 						<%= form_tag deside_event_path(@event) do %>
 
 						<%= hidden_field_tag :tp_id, tp.id %>
-						<div class="field">
+						<div class="form-group">
 							<%= label :event, :place, class: "control-label" %>
 							<%= text_field :event, :place, class: "form-control", placeholder: "place" %>
 						</div>
-						<div class="field">
+						<div class="form-group">
 							<%= label :event, :address, class: "control-label" %>
 							<%= text_field :event, :address, class: "form-control", placeholder: "address" %>
 						</div>
-						<div class="field">
+						<div class="form-group">
 							<%= label :event, :cost, class: "control-label" %>
 							<%= number_field :event, :cost, class: "form-control", placeholder: "cost" %>
 						</div>
-						<div class="field">
+						<div class="form-group">
 							<%= label :event, :message, class: "control-label" %>
 							<%= text_area :event, :message, class: "form-control", placeholder: "message" %>
 						</div>
 						<div class="action" align="center">
-							<%= submit_tag t('deside'), class: "btn btn-primary" %>
+							<%= submit_tag t('deside'), class: "btn btn-primary",
+							data: { disable_with: '送信中' } %>
 						</div>
 
 						<% end %><!-- end form -->
@@ -182,8 +185,8 @@
 	<!-- モーダルウィンドウ終了 -->
 
 	<!-- 決定ボタン -->
-	<div class="text-center">
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deside<%= tp.my_entry.id %>"><%= t("deside") %></button>
+	<div class="text-center" id="deside_btn_for_timeplan_<%= i %>">
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deside_timeplan_<%= i %>"><%= t("deside") %></button>
 	</div>
 
 	<% end %><!-- end if -->

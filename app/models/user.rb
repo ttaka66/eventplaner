@@ -11,5 +11,8 @@ class User < ActiveRecord::Base
   has_many :timeplans, through: :entries
 
   has_many :comments
-  has_many :events, through: :comments
+  # has_many :events, through: :comments
+  has_many :active_relationships, class_name:  "Relationship",
+    foreign_key: "own_id", dependent: :destroy
+  has_many :friends, through: :active_relationships, source: :friend
 end

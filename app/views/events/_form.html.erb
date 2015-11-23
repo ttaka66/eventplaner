@@ -10,7 +10,7 @@
   <% end %>
 
   <%= hidden_field_tag :act, @act %>
-  <%= f.hidden_field :color, value: @act == 'group' ? 'yellow' : 'blue' %>
+  <%= f.hidden_field :color, value: @act == 'group' ? 'yellow' : 'green' %>
 
   <div class="form-group">
     <%= f.label :title %><br>
@@ -52,7 +52,7 @@
     </div>
 
     <p><%= label_tag :timeplans_cnt, t('number of candidates') %>
-    <%= select_tag :timeplans_cnt, options_for_select([1,2,3,4,5],selected: 2), size: 1 %>
+    <%= select_tag :timeplans_cnt, options_for_select([1,2,3,4,5], selected: (flash[:timeplans_cnt] ? flash[:timeplans_cnt] : 2)), size: 1 %>
     </p>  
 
     <div id="timeplans">

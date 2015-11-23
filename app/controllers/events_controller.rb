@@ -6,6 +6,8 @@ class EventsController < ApplicationController
 
   def index
     @events = current_user.events
+    # @entris = current_user.entries.where(attendance: true)
+    @entries = Entry.where(user_id: current_user.id, attendance: true)
     # respond_with(@events)
   end
 
@@ -51,7 +53,6 @@ class EventsController < ApplicationController
     @event = Event.new
 
     if @act == 'group'
-      # @event.timeplans.build
       2.times { @event.timeplans.build }
     end
     
@@ -85,8 +86,6 @@ class EventsController < ApplicationController
     else
       @event.users << current_user
 
-      # current_user.events.create(event_params)
-
     end
     respond_to do |format|
       if @event.save
@@ -95,6 +94,7 @@ class EventsController < ApplicationController
       else
         format.html {
           flash[:act] = @act
+          flash[:timeplans_cnt] = params[:timeplans_cnt]
           render action: 'new' }
         format.json { render json: @event.errors, status: :unprocessable_entity}
       end
@@ -103,39 +103,47 @@ class EventsController < ApplicationController
 
   def update
     @event.update(event_params)
-    respond_with(@event) 
+    redirect_to  @event, notice: '場所を変更しました'
   end
 
   def deside
     # 確定したプランを取得
     tp = Timeplan.find(params[:tp_id])
-    @event.transaction do
-      # 開始と終了とカラーを更新
-      @event.update(start: tp.start, end: tp.end, color: 'green')
-      # イベント情報を更新
-      @event.update(event_params)
+    if Entry.where(timeplan_id: tp.id, attendance: true).count == 0
+      redirect_to @event, alert: '参加者がいないイベントは登録できません'
 
-      # 参加できるユーザーを登録
-      tp.entries.each do |ent|
-        if ent.attendance == true
-          @event.users << ent.user
+    else
+      @event.transaction do
+        # 開始と終了とカラーを更新
+        @event.update(start: tp.start, end: tp.end, color: 'green')
+        # イベント情報を更新
+        @event.update(event_params)
+
+        # 参加できるユーザーを登録
+        tp.entries.each do |ent|
+          if ent.attendance == true
+            @event.users << ent.user
+          end
         end
+        # イベントに関連するtimeplansレコードとentriesレコードを削除
+        @event.destroy_timeplans_and_entries
+        # raise '例外'
+         redirect_to @event, notice: 'イベントが確定しました'
       end
-      # イベントに関連するtimeplansレコードとentriesレコードを削除
-      @event.timeplans.each do |tp2|
-        tp2.entries.destroy_all
-        tp2.destroy
-      end
-      # raise '例外'
-      redirect_to @event
     end
   rescue => e
     render text: e.message
   end
 
   def destroy
+    if @event.owner_id
+      @event.transaction do
+        @event.destroy_timeplans_and_entries
+      end
+
+    end
     @event.destroy
-    respond_with(@event)
+    redirect_to root_path, notice: 'イベントを削除しました'
   end
 
   private

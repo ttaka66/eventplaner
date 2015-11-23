@@ -213,6 +213,9 @@ ja:
   change profile: 'プロフィール変更'
   log out: 'ログアウト'
 
+  # homeコントローラー
+  calendar: 'カレンダー'
+
   # eventsコントローラー
   add event: 'イベントを追加'
   invitate event: 'イベントに招待'
@@ -222,8 +225,9 @@ ja:
   create event: 'イベントを作成する'
   invite event: 'イベントに招待する'
   show event: 'イベントを見る'
-  hoseted event: '主催しているイベント'
-  invited event: '招待されているイベント'
+  all events: 'すべてのイベント'
+  hoseted events: '主催しているイベント'
+  invited events: '招待されているイベント'
   there is no invited event: '招待されているイベントはありません'
   there is no hoseted event: '主催しているイベントはありません'
   participant: '参加者'
@@ -231,6 +235,7 @@ ja:
   message: 'メッセージ'
   people can participate: '人が参加できます'
   there is no attendance people: '参加する人はいません'
+  people: '人'
   I can attend: '私は参加できます'
   I can't attend: '私は参加できません'
   starttime: '開始時間'
@@ -246,3 +251,6 @@ ja:
   yen: '円'
   date and time: '日時'
   number of candidates: '候補数'
+  delete event: 'イベントを削除する'
+  Are you sure you want to delete: '本当に削除しますか'
+  change place: '場所を変更する'

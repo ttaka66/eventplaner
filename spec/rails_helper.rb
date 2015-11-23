@@ -35,6 +35,8 @@ end
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   # config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -61,6 +63,15 @@ RSpec.configure do |config|
 
   # FactoryGirlの構文をインクルード
   config.include FactoryGirl::Syntax::Methods
+
+  # ログイン用のマクロ
+  config.include LoginMacros
+  # ログアウト用のマクロ
+  config.include LogoutMacros
+  # グループイベント作成用のマクロ
+  config.include CreateGroupEventMacros
+  # グループイベント参加用のマクロ
+  config.include AttendEventMacros
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)

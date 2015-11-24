@@ -8,11 +8,7 @@ feature 'チャット機能' do
 		my_user = create(:user)
 		event = create(:group_event)
 
-		visit root_path
-
-		fill_in 'Email', with: my_user.email
-		fill_in 'パスワード', with: my_user.password
-		click_button 'Log in'
+		sign_in my_user
 
 		visit event_path(event)
 	end

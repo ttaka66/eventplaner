@@ -1,0 +1,40 @@
+<div class="title">
+	<h1><%= t('friends list') %></h1>
+</div>
+
+<div id="friends_list">
+	<div class="row">
+
+		<div class="col-md-8">
+
+			<ul class="media-list list-group">
+				<%= render 'user_list', users: @friends %>
+			</ul>
+
+
+
+		</div>
+
+		<div class="col-md-4">
+
+			<ul class="media-list list-group" id="search_friend">
+				<li href="#" class="list-group-item active" id="search_form">
+					<h4 class="list-group-item-heading"><%= t('search friend') %></h4>
+					<%= form_tag search_user_path, class: 'form-horizontal', role: 'form', remote: true do %>
+					<div class="form-group">
+						<%= text_field_tag :word, '', class: 'form-control' %>
+					</div>
+					<div style="text-align:center;">
+						<%= submit_tag t('search'), class: 'btn btn-default', data: { disable_with: '検索中' } %>
+					</div>
+					<% end %>
+				</li>
+
+				<div id="search_result"></div>
+			</ul>
+
+		</div>
+
+	</div>
+
+</div>

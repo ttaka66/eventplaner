@@ -228,6 +228,7 @@ ja:
   all events: 'すべてのイベント'
   hoseted events: '主催しているイベント'
   invited events: '招待されているイベント'
+  friends list: '友達リスト'
   there is no invited event: '招待されているイベントはありません'
   there is no hoseted event: '主催しているイベントはありません'
   participant: '参加者'
@@ -254,3 +255,10 @@ ja:
   delete event: 'イベントを削除する'
   Are you sure you want to delete: '本当に削除しますか'
   change place: '場所を変更する'
+  there is no friend: '友達は登録されていません'
+  search friend: '友達を探す'
+  search: '検索'
+  delete from list: 'リストから削除'
+  add to list: 'リストに追加'
+  add friend to friends list: '友達リストに追加しました'
+

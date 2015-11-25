@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'users/friends'
+
   root to: 'home#index'
 
   resources :events do
@@ -15,13 +17,14 @@ Rails.application.routes.draw do
 
   resources :entries
 
-  
-
   get 'home/index'
 
-
-
   devise_for :users
+
+  get 'users/:id/friends' => 'users#friends', as: 'user_friends'
+  post 'users/search' => 'users#search', as: 'search_user'
+
+  resources :relationships, only:[:create, :destroy]
 
   # devise_scope :user do
   #   root :to => "devise/registrations#new"

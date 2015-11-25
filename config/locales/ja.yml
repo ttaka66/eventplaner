@@ -261,4 +261,5 @@ ja:
   delete from list: 'リストから削除'
   add to list: 'リストに追加'
   add friend to friends list: '友達リストに追加しました'
+  can't show other's friends list: '他人の友達リストを見ることはできません'
 

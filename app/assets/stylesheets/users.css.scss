@@ -2,23 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-/*users#friend*/
+// users#friend
 #friends_list{
-	li{
-		/*line-height: 2;*/
-		margin-top: 0;
-		.list_btn{
-			display: inline-table;
-			position: absolute;
-			margin: auto;
-			top: 5px;
-			bottom: 5px;
-			right: 15px;
-			.btn{
-				width: 125px;
-			}
-		}
-	}
 	#search_friend{
 		.list-group-item-heading{
 			margin-bottom: 15px;
@@ -26,10 +11,31 @@
 		#search_form{
 			padding: 10px 30px;
 			.btn{
-			width: 80px;
+				width: 80px;
 			}
 		}
 	}
+}
+
+// users#_user_list
+.user_list{
+	margin-top: 0;
+	.list_btn{
+		display: inline-table;
+		position: absolute;
+		margin: auto;
+		top: 5px;
+		bottom: 5px;
+		right: 15px;
+		.btn{
+			width: 125px;
+		}
+	}
+}
+
+.invitees{
+	@extend .user_list;
+	background-color: #7EFF70;
 }
 
 

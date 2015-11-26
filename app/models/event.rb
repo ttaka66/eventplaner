@@ -15,8 +15,8 @@ class Event < ActiveRecord::Base
 
 	def destroy_timeplans_and_entries
 		timeplans.each do |tp|
-          tp.entries.destroy_all
-          tp.destroy
-        end
+			tp.entries.destroy_all
+			tp.destroy
+		end
 	end
 end

@@ -2,7 +2,30 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+/*events#new*/
+.input-group{
+	width:250px;
+}
 
+#invite_from_friends_list{
+	overflow: scroll;
+	height: 621px;
+	li{
+		cursor: pointer;
+	}
+	.user_list:hover{
+		background-color: rgb(238, 238, 238);
+	}
+}
+
+#submit_btn{
+	text-align:center;
+	input[type="submit"]{
+		margin-top: 50px;
+	}
+}
+
+// events#show
 .time_candidate{
 	button{
 		margin-bottom: 10px;
@@ -10,11 +33,6 @@
 	#cnt{
 		font-size: 16px;
 	}
-}
-
-/*events#new*/
-.input-group{
-	width:250px;
 }
 
 

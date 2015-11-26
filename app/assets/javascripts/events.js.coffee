@@ -3,13 +3,9 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-
-$ ->
-	console.log("セット")
-
 initEvents = ->
 
-	# event#new
+	# events#new
 
 	# datetimepickerのオプション
 	picker_option = {
@@ -57,29 +53,40 @@ initEvents = ->
 		  $("#timeplans").append(timeplan_now)
 	  $(".datetimepicker").datetimepicker(picker_option)
 
+	# 友達リストにマウスが乗った時の処理
+	# $('#invite_from_friends_list .user_list').mouseover ->
+	# 	$(this).css("cursor","pointer")
 
+	# $('#invite_from_friends_list .invitees').mouseover ->
+	# 	$(this).css("cursor","pointer")
+
+	# 友達をクリックした時の処理
+	$(document).on "click", '#invite_from_friends_list > .user_list', ->
+		user_id = $(this).data('id')
+		$(this).after("<input id='invite_#{user_id}' name='invitees[]' type='hidden' value='#{user_id}' />")
+		$(this).removeClass("user_list").addClass("invitees")
+
+	$(document).on "click", '#invite_from_friends_list > .invitees', ->
+		$(this).removeClass('invitees').addClass('user_list')
+		user_id = $(this).data('id')
+		$('#invite_' + user_id).remove()
+
+	# events#show
+
+	# 参加不参加ボタンの切り替え
 	$(".can").hover ->
-		$(this).removeClass("btn-success").addClass("btn-danger").text("参加できません")
+		$(this).removeClass("btn-success").addClass("btn-danger").text("私は参加できません")
 		return
 	, ->
-		$(this).removeClass("btn-danger").addClass("btn-success").text("参加できます")
+		$(this).removeClass("btn-danger").addClass("btn-success").text("私は参加できます")
 		return
 
 	$(".cant").hover ->
-		$(this).removeClass("btn-danger").addClass("btn-success").text("参加できます")
+		$(this).removeClass("btn-danger").addClass("btn-success").text("私は参加できます")
 		return
 	, ->
-		$(this).removeClass("btn-success").addClass("btn-danger").text("参加できません")
+		$(this).removeClass("btn-success").addClass("btn-danger").text("私は参加できません")
 		return
-
-  success = (response) ->
-  	console.log("event_confirmationイベントが発生しました: " + response.message)
-  	return
-
-
-	failure = (response) ->
-  	console.log("event_confirmationイベント生成に失敗しました " + response.message)
-  	return
 
 # ページロード時にinit関数を実行
 $(document).ready(initEvents)

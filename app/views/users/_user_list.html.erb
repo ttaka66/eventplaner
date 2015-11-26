@@ -1,25 +1,39 @@
+<% if users.empty? %>
+	<li class="list-group-item">存在しません</li>
+<% else %>
+
 <% users.each do |u| %>
 
-<li class="media list-group-item user_list">
+<% list_class = @invitee_ids && @invitee_ids.include?(u.id.to_s) ? 'invitees' : 'user_list' %>
+
+<li class="media list-group-item <%= list_class %>" data-id=<%= u.id %>>
 	<a href="#" class="pull-left">
-		<%= image_tag 'no_image.jpg', width: 64, height: 64, class: "img-rounded" %>
+		<%= image_tag 'no_image.jpg', width: 40, height: 40, class: "img-rounded" %>
 	</a>
 	<div class="media-body">
 		<h4 class="media-heading"><%= u.username %></h4>
 		<p></p>
+		<% if controller_name == 'users' %>
 		<div class="list_btn">
 			<% if relation = Relationship.find_by(own_id: current_user, friend_id: u) %>
-				<%= link_to t('delete from list'), relation, method: :delete,
-				data: { confirm: 'Are you sure'}, class: 'btn btn-danger' %>
+			<%= link_to t('delete from list'), relation, method: :delete,
+			data: { confirm: 'Are you sure'}, class: 'btn btn-danger' %>
 			<% else %>
-				<%= form_for(Relationship.new) do |f| %>
-					<%= f.hidden_field :own_id, value: current_user.id %>
-					<%= f.hidden_field :friend_id, value: u.id %>
-					<%= f.submit t('add to list'), class: 'btn btn-primary' %>
-				<% end %>
+			<%= form_for(Relationship.new) do |f| %>
+			<%= f.hidden_field :own_id, value: current_user.id %>
+			<%= f.hidden_field :friend_id, value: u.id %>
+			<%= f.submit t('add to list'), class: 'btn btn-primary' %>
+			<% end %>
 			<% end %>
 		</div>
+		<% end %>
 	</div>
 </li>
+
+<% if list_class == 'invitees' %>
+	<input id="invite_<%= u.id %>" name="invitees[]" type="hidden" value="<%= u.id %>" />
+<% end %>
+
+<% end %>
 
 <% end %>

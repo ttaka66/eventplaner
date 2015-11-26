@@ -53,6 +53,7 @@ class EventsController < ApplicationController
     @event = Event.new
 
     if @act == 'group'
+      @my_friends = current_user.friends
       2.times { @event.timeplans.build }
     end
     
@@ -66,6 +67,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @act = params[:act]
+    @invitee_ids = params[:invitees]
     if @act == 'group'
 
       @event.timeplans.each do |tp|
@@ -73,12 +75,15 @@ class EventsController < ApplicationController
         tp.users << current_user
 
         # 招待メンバーのユーザー名を取得
-        params['invitees'].each do |inv|
+        @invitee_ids.each do |inv|
+          begin
           # Userモデルを取得
-          if i = User.find_by(username: inv)
-            # 候補日時に関連するユーザーを作成
-            tp.users << i
+          i = User.find(inv)
+          # 候補日時に関連するユーザーを作成
+          tp.users << i
+          rescue
           end
+
         end
 
       end
@@ -93,7 +98,7 @@ class EventsController < ApplicationController
         format.json { render action: 'show', status: :created, location: @event}
       else
         format.html {
-          flash[:act] = @act
+          @my_friends = current_user.friends
           flash[:timeplans_cnt] = params[:timeplans_cnt]
           render action: 'new' }
         format.json { render json: @event.errors, status: :unprocessable_entity}

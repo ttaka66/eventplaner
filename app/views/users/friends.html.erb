@@ -20,7 +20,7 @@
 			<ul class="media-list list-group" id="search_friend">
 				<li href="#" class="list-group-item active" id="search_form">
 					<h4 class="list-group-item-heading"><%= t('search friend') %></h4>
-					<%= form_tag search_user_path, class: 'form-horizontal', role: 'form', remote: true do %>
+					<%= form_tag search_users_path, class: 'form-horizontal', role: 'form', remote: true do %>
 					<div class="form-group">
 						<%= text_field_tag :word, '', class: 'form-control' %>
 					</div>

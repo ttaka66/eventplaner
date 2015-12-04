@@ -208,10 +208,8 @@ ja:
     cost: '費用'
     password: 'パスワード'
 
-  # アプリケーションコントローラー
-  log in: 'ログイン'
-  change profile: 'プロフィール変更'
-  log out: 'ログアウト'
+  # applicationコントローラー
+  a profile is changed: 'プロフィールを変更しました'
 
   # homeコントローラー
   calendar: 'カレンダー'

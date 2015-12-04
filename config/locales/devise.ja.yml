@@ -1,12 +1,25 @@
 ja:
+  log in: 'ログイン'
+  change profile: 'プロフィール変更'
+  change account: 'アカウント変更'
+  cancel account: '退会'
+  delete your account?: 'アカウントを削除しますか?'
+  yes I do: 'はい'
+  log out: 'ログアウト'
+  Forgot your password?: 'パスワードを忘れた場合'
+  Send me reset password instructions: 'パスワード再発行'
+  leave blank if you don't want to change it: '変更しない場合は空白のままにしてください'
+  we need your current password to confirm your changes: '現在のパスワードは必ず入力してください'
   errors:
     messages:
-      not_found: "は見つかりませんでした"
-#      not_found: "not found"
-      already_confirmed: "は既に登録済みです"
-#      already_confirmed: "was already confirmed"
-      not_locked: "は凍結されていません"
-#      not_locked: "was not locked"
+      already_confirmed: 'は既に登録済みです。ログインしてください。'
+      confirmation_period_expired: "の期限が切れました。%{period} までに確認する必要があります。 新しくリクエストしてください。"
+      expired: 'の有効期限が切れました。新しくリクエストしてください。'
+      not_found: 'は見つかりませんでした。'
+      not_locked: 'は凍結されていません。'
+      not_saved:
+        one: "エラーが発生したため %{resource} は保存されませんでした:"
+        other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした:"
 
   devise:
     failure:
@@ -70,6 +83,7 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード確認
+        current_password: 現在のパスワード
         remember_me: 次回からパスワード入力を省く
 
   log in: 'ログイン'

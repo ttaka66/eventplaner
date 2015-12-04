@@ -21,8 +21,18 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  get 'users/:id/friends' => 'users#friends', as: 'user_friends'
-  post 'users/search' => 'users#search', as: 'search_user'
+  resources :users, only:[:edit, :update] do
+    collection do
+      post :search
+    end
+    member do
+      get :friends
+      get :cancel_account
+    end
+  end
+
+  # get 'users/:id/friends' => 'users#friends', as: 'user_friends'
+  # post 'users/search' => 'users#search', as: 'search_user'
 
   resources :relationships, only:[:create, :destroy]
 

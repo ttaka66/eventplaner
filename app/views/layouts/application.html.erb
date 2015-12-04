@@ -9,7 +9,7 @@
 
 <body>
 
-<% if  user_signed_in? %>
+<% if user_signed_in? %>
 	<div id="wrapper">
 
 		<!-- Navigation -->
@@ -94,9 +94,11 @@
 							<i class="fa fa-caret-down"></i>
 						</a>
 						<ul class="dropdown-menu dropdown-user">
-							<li><%= link_to sanitize('<i class="fa fa-user fa-fw"></i>') + t('change profile'), edit_user_registration_path %>
+							<li><%= link_to sanitize('<i class="fa fa-user fa-fw"></i>') + t('change profile'), edit_user_path(current_user) %>
 							</li>
-							<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+							<li><%= link_to t('change account'), edit_user_registration_path%>
+							</li>
+							<li><%= link_to t('cancel account'), cancel_account_user_path(current_user)%>
 							</li>
 							<li class="divider"></li>
 							<li> 
@@ -129,7 +131,7 @@
 							<!-- /.nav-second-level -->
 						</li>
 						<li>
-							<%= link_to t('friends list'), user_friends_path(current_user) %>
+							<%= link_to t('friends list'), friends_user_path(current_user) %>
 						</li>
 					</ul>
 					<!-- /.nav-second-level -->
@@ -141,10 +143,7 @@
 	<!-- /.navbar-static-side -->
 </nav>
 
-<div id="page-wrapper">
-	
-
-	
+<div id="page-wrapper" style="min-height: 600px;">
 
 	<div id="main">
 		<div class="add_alert"></div>

@@ -16,13 +16,13 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require moment/ja.js
-//= require user_management
+//= require user_management.js
 //= require fullcalendar
 //= require bootstrap
 //= require calendar
 //= require events
 //= require websocket_rails/main
-//= require metisMenu
-//= require sb-admin-2
+//= require metisMenu.js
+//= require sb-admin-2.js
 
 

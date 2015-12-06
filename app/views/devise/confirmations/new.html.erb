@@ -1,16 +1,36 @@
-<h2>Resend confirmation instructions</h2>
+<div class="panel-heading">
+	<h2><%= t('Resend confirmation instructions') %></h2>
+	<hr>
+</div>
 
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+<div class="panel-body">
+	<div class="row">
+		<div class="col-lg-12">
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %> 
-  </div>
+			<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+			<%= devise_error_messages! %>
 
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
-  </div>
-<% end %>
+			<div class="form-group">
+				<%= f.label :email %><br />
+				<%= f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: "form-control", placeholder: "Email Address" %> 
+			</div>
 
-<%= render "devise/shared/links" %>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-12 col-xs-12">
+						<%= f.submit t('transmission'), class: "form-control btn btn-success", data: { disable_with: t('sending') } %>
+					</div>
+				</div>
+			</div>
+
+			<% end %>
+
+			<div class="form-group">
+				<div class="text-center">
+				<%= link_to t('return to the login screen'), new_session_path(resource_name) %><br />
+				<%= render "devise/shared/links" %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

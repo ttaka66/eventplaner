@@ -66,6 +66,8 @@ group :development, :test do
   gem 'rspec-rails' # Rails専用の機能を追加するRSpecのラッパーライブラリ
   gem 'factory_girl_rails' # フィクスチャをファクトリで置き換える為のgem
   gem 'guard-rspec' # テストの自動実行の為のgem
+
+  gem 'foreman' #.envファイルを利用する為のgem
 end
 
 group :test do
@@ -82,3 +84,5 @@ gem 'websocket-rails' #websocket通信を利用するためのgem
 
 gem 'kaminari' #ペ−ジネーションのためのgem
 gem 'kaminari-bootstrap' #kaminariのviewをbootstrap用にカスタマイズするためのgem
+
+

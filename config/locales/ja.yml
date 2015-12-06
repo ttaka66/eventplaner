@@ -232,6 +232,7 @@ ja:
   participant: '参加者'
   participant list: '参加者リスト'
   message: 'メッセージ'
+  creating: '作成中'
   people can participate: '人が参加できます'
   there is no attendance people: '参加する人はいません'
   people: '人'

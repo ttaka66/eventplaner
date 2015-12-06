@@ -9,7 +9,7 @@
 
 <body>
 
-<% if user_signed_in? %>
+	<% if user_signed_in? %>
 	<div id="wrapper">
 
 		<!-- Navigation -->
@@ -27,86 +27,86 @@
 
 			<ul class="nav navbar-top-links navbar-right">
 				
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							<i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
-						</a>
-						<ul class="dropdown-menu dropdown-alerts">
-							<li>
-								<a href="#">
-									<div>
-										<i class="fa fa-comment fa-fw"></i> New Comment
-										<span class="pull-right text-muted small">4 minutes ago</span>
-									</div>
-								</a>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<a href="#">
-									<div>
-										<i class="fa fa-twitter fa-fw"></i> 3 New Followers
-										<span class="pull-right text-muted small">12 minutes ago</span>
-									</div>
-								</a>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<a href="#">
-									<div>
-										<i class="fa fa-envelope fa-fw"></i> Message Sent
-										<span class="pull-right text-muted small">4 minutes ago</span>
-									</div>
-								</a>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<a href="#">
-									<div>
-										<i class="fa fa-tasks fa-fw"></i> New Task
-										<span class="pull-right text-muted small">4 minutes ago</span>
-									</div>
-								</a>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<a href="#">
-									<div>
-										<i class="fa fa-upload fa-fw"></i> Server Rebooted
-										<span class="pull-right text-muted small">4 minutes ago</span>
-									</div>
-								</a>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<a class="text-center" href="#">
-									<strong>See All Alerts</strong>
-									<i class="fa fa-angle-right"></i>
-								</a>
-							</li>
-						</ul>
-						<!-- /.dropdown-alerts -->
-					</li>
-					<!-- /.dropdown -->
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							<i class="fa fa-user fa-fw"></i>
-							<%= current_user.username %>
-							<i class="fa fa-caret-down"></i>
-						</a>
-						<ul class="dropdown-menu dropdown-user">
-							<li><%= link_to sanitize('<i class="fa fa-user fa-fw"></i>') + t('change profile'), edit_user_path(current_user) %>
-							</li>
-							<li><%= link_to t('change account'), edit_user_registration_path%>
-							</li>
-							<li><%= link_to t('cancel account'), cancel_account_user_path(current_user)%>
-							</li>
-							<li class="divider"></li>
-							<li> 
-								<%= link_to sanitize('<i class="fa fa-sign-out fa-fw"></i>') + t('log out'), destroy_user_session_path, method: :delete %></a>
-							</li>
-						</ul>
-						<!-- /.dropdown-user -->
-					</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
+					</a>
+					<ul class="dropdown-menu dropdown-alerts">
+						<li>
+							<a href="#">
+								<div>
+									<i class="fa fa-comment fa-fw"></i> New Comment
+									<span class="pull-right text-muted small">4 minutes ago</span>
+								</div>
+							</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="#">
+								<div>
+									<i class="fa fa-twitter fa-fw"></i> 3 New Followers
+									<span class="pull-right text-muted small">12 minutes ago</span>
+								</div>
+							</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="#">
+								<div>
+									<i class="fa fa-envelope fa-fw"></i> Message Sent
+									<span class="pull-right text-muted small">4 minutes ago</span>
+								</div>
+							</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="#">
+								<div>
+									<i class="fa fa-tasks fa-fw"></i> New Task
+									<span class="pull-right text-muted small">4 minutes ago</span>
+								</div>
+							</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="#">
+								<div>
+									<i class="fa fa-upload fa-fw"></i> Server Rebooted
+									<span class="pull-right text-muted small">4 minutes ago</span>
+								</div>
+							</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a class="text-center" href="#">
+								<strong>See All Alerts</strong>
+								<i class="fa fa-angle-right"></i>
+							</a>
+						</li>
+					</ul>
+					<!-- /.dropdown-alerts -->
+				</li>
+				<!-- /.dropdown -->
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="fa fa-user fa-fw"></i>
+						<%= current_user.username %>
+						<i class="fa fa-caret-down"></i>
+					</a>
+					<ul class="dropdown-menu dropdown-user">
+						<li><%= link_to sanitize('<i class="fa fa-user fa-fw"></i>') + t('change profile'), edit_user_path(current_user) %>
+						</li>
+						<li><%= link_to t('change account'), edit_user_registration_path%>
+						</li>
+						<li><%= link_to t('cancel account'), cancel_account_user_path(current_user)%>
+						</li>
+						<li class="divider"></li>
+						<li> 
+							<%= link_to sanitize('<i class="fa fa-sign-out fa-fw"></i>') + t('log out'), destroy_user_session_path, method: :delete %></a>
+						</li>
+					</ul>
+					<!-- /.dropdown-user -->
+				</li>
 				
 				<!-- /.dropdown -->
 			</ul>
@@ -148,10 +148,10 @@
 	<div id="main">
 		<div class="add_alert"></div>
 		<% if flash[:notice] %>
-			<div class="alert alert-success alert-dismissible">
+		<div class="alert alert-success alert-dismissible">
 			<button class="close" type="button" data-dismiss="alert" area-label="閉じる">×</button>
-				<%= flash[:notice] %>
-			</div>
+			<%= flash[:notice] %>
+		</div>
 		<% end %>
 		<% if flash[:alert] %>
 		<div class="alert alert-danger alert-dismissible">
@@ -160,7 +160,7 @@
 		</div>
 		<% end %>
 
-	<%= yield %>
+		<%= yield %>
 
 	</div>
 	<!-- /.row -->
@@ -171,7 +171,7 @@
 <!-- /#wrapper -->
 
 <% else %>
-<% if flash[:alert] %>
+	<% if flash[:alert] %>
 	<div class="alert alert-danger alert-dismissible">
 		<button class="close" type="button" data-dismiss="alert" area-label="閉じる">×</button>
 		<%= flash[:alert] %>
@@ -180,8 +180,13 @@
 
 	<div class="add_alert"></div>
 
-	<%= yield %>
-	<!-- /.row -->
+	<div id="user_management" class="col-md-6 col-md-offset-3">
+
+		<div class="panel panel-user">
+
+			<%= yield %>
+		</div>
+	</div>
 <% end %>
 
 </body>

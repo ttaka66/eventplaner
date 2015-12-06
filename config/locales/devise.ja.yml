@@ -8,6 +8,15 @@ ja:
   log out: 'ログアウト'
   Forgot your password?: 'パスワードを忘れた場合'
   Send me reset password instructions: 'パスワード再発行'
+  Change your password: 'パスワード変更'
+  New password: '新しいパスワード'
+  Change my password: 'パスワードを変更します'
+  Confirm new password: '新しいパスワード(確認)'
+  Didn't receive confirmation instructions?: '確認メールの再送信'
+  Resend confirmation instructions: '確認メールの再送信'
+  transmission: '送信'
+  sending: '送信中'
+  return to the login screen: 'ログイン画面に戻る'
   leave blank if you don't want to change it: '変更しない場合は空白のままにしてください'
   we need your current password to confirm your changes: '現在のパスワードは必ず入力してください'
   errors:
@@ -30,6 +39,7 @@ ja:
 #      unconfirmed: 'You have to confirm your account before continuing.'
       locked: 'あなたのアカウントは凍結されています。'
 #      locked: 'Your account is locked.'
+      not_found_in_database: "メールアドレスまたはパスワードが無効です。"
       invalid: 'メールアドレスかパスワードが違います。'
 #      invalid: 'Invalid email or password.'
       invalid_token: '認証キーが不正です。'
@@ -48,6 +58,7 @@ ja:
 #      send_instructions: 'You will receive an email with instructions about how to reset your password in a few minutes.'
       updated: 'パスワードを変更しました。'
 #      updated: 'Your password was changed successfully. You are now signed in.'
+      no_token: "このページにアクセスする事が出来ません。正しいURLでアクセスしている事を確認して下さい。"
     confirmations:
       send_instructions: '登録方法を数分以内にメールでご連絡します。'
 #      send_instructions: 'You will receive an email with instructions about how to confirm your account in a few minutes.'

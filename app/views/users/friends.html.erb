@@ -11,7 +11,9 @@
 				<%= render 'user_list', users: @friends %>
 			</ul>
 
-
+			<div class="text-center">
+				<%= paginate @friends, param_name: :friends_page %>
+			</div>
 
 		</div>
 

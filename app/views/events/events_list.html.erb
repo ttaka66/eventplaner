@@ -1,0 +1,24 @@
+<div class="list-group">
+  <h4 class="list-group-item active">
+    <%= @title %>
+  </h4>
+  <% if @events.any? %>
+    <% @events.each do |ev| %>
+      <%= link_to ev, class: "list-group-item" do %>
+        <h4 class="list-group-item-header">
+          <%= ev.title %>
+        </h4>
+        <% if ev.start && ev.end %>
+          <p class="list-group-item-text" style="text-align:right;">
+            <%= l(ev.start, format: :short) %> 〜 <%= l(ev.end, format: :short) %>
+          </p>
+        <% end %>
+      <% end %>
+    <% end %>
+    <div class="text-center">
+      <%= paginate @events, param_name: :events_page %>
+    </div>
+  <% else %>
+    <p class="list-group-item"><%= t('there is no event') %></p>
+  <% end %>
+</div>

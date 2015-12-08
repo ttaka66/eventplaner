@@ -6,17 +6,29 @@ class EventsController < ApplicationController
 
   def index
     @events = current_user.events
-    # @entris = current_user.entries.where(attendance: true)
     @entries = Entry.where(user_id: current_user.id, attendance: true)
-    # respond_with(@events)
+  end
+
+  def desided_all
+    @events = current_user.events.where('start > ?', Time.zone.now).order(:start)
+    .page(params[:events_page]).per(10)
+    @title = t('desided events')
+    render action: 'events_list'
   end
 
   def host
-    @events = Event.where(owner: current_user).order(created_at: :desc)
+    @events = Event.where(owner: current_user).newer.page(params[:events_page]).per(10)
+    @title = t('hoseted events')
+    render action: 'events_list'
   end
 
   def gest
-    @plans = current_user.timeplans.select(:event_id).distinct
+    events_array = current_user.timeplans.pluck(:event_id).uniq
+    # render text: events_array
+    @events = Event.where(id: events_array).where.not(owner: current_user)
+    .newer.page(params[:events_page]).per(10)
+    @title = t('invited events')
+    render action: 'events_list'
   end
 
   def show

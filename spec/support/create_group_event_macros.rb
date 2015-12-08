@@ -16,10 +16,8 @@ module CreateGroupEventMacros
 		find('#timeplan2').fill_in '終了時間', with: '2017/01/02 01:00'
 		# find('#timeplan3').fill_in '開始時間', with: '2017/01/03 00:00'
 		# find('#timeplan3').fill_in '終了時間', with: '2017/01/03 01:00'
-		num = 1
 		invitees.each do |i|
-			fill_in "invitees#{num}", with: i.username
-			num += 1
+			click_on i.username
 		end
 
 		click_on '登録する'

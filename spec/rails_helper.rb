@@ -5,6 +5,8 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+require 'capybara/rails'
+require 'capybara/rspec'
 
 require 'capybara/poltergeist'
 
@@ -12,7 +14,7 @@ Capybara.javascript_driver = :poltergeist
 
 options = {:js_errors => false}
 Capybara.register_driver :poltergeist do |app|
-    Capybara::Poltergeist::Driver.new(app, options)
+    Capybara::Poltergeist::Driver.new(app, js_errors: false, inspector: true)
 end
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -60,6 +62,8 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+
+  config.include Devise::TestHelpers, type: :controller
 
   # FactoryGirlの構文をインクルード
   config.include FactoryGirl::Syntax::Methods

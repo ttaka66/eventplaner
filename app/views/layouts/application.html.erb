@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Eventplan</title>
+	<title>Eventplaner</title>
 	<%= stylesheet_link_tag    'application', media: 'all' %>
 	<%= javascript_include_tag 'application' %>
 	<%= csrf_meta_tags %>
@@ -21,12 +21,15 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<%= link_to 'Home', '/', class: "navbar-brand" %>
+				<%= link_to 'Event planer', '/', class: "navbar-brand" %>
 			</div>
 			<!-- /.navbar-header -->
 
 			<ul class="nav navbar-top-links navbar-right">
 				
+<%
+=begin
+%>
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 						<i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
@@ -86,6 +89,10 @@
 					</ul>
 					<!-- /.dropdown-alerts -->
 				</li>
+<%
+=end
+%>
+
 				<!-- /.dropdown -->
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -124,7 +131,7 @@
 						<li>
 							<a href="#"><%= t('show event') %><span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
-								<li><%= link_to t('all events'), events_path %></li>
+								<li><%= link_to t('desided events'), desided_all_events_path %></li>
 								<li><%= link_to t('hoseted events'), host_events_path %></li>
 								<li><%= link_to t('invited events'), gest_events_path %></li>
 							</ul>

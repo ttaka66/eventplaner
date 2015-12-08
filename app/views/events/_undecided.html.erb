@@ -115,8 +115,13 @@
 			<% tp.entries.each do |ent| %>
 			<% if ent.attendance == true %>
 			<tr>
-				<td><%= ent.user.username %></td>
-				<td><%= ent.message %></td>
+				<td style="vertical-align: middle;">
+					<a href="#">
+						<%= image_tag 'no_image.jpg', width: 40, height: 40, class: "img-rounded" %>
+					</a>
+					<%= ent.user.username %>
+				</td>
+				<td><p style="vertical-align: middle;"><%= simple_format(ent.message) %></p></td>
 			</tr>
 			<% end %>
 			<% end %>
@@ -166,7 +171,7 @@
 							<%= text_area :event, :message, class: "form-control", placeholder: "message" %>
 						</div>
 						<div class="action" align="center">
-							<%= submit_tag t('deside'), class: "btn btn-primary",
+							<%= submit_tag t('deside'), class: "btn btn-primary deside",
 							data: { disable_with: '送信中' } %>
 						</div>
 
@@ -186,7 +191,7 @@
 
 	<!-- 決定ボタン -->
 	<div class="text-center" id="deside_btn_for_timeplan_<%= i %>">
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deside_timeplan_<%= i %>"><%= t("deside") %></button>
+		<button type="button" class="btn btn-primary deside" data-toggle="modal" data-target="#deside_timeplan_<%= i %>"><%= t("deside") %></button>
 	</div>
 
 	<% end %><!-- end if -->

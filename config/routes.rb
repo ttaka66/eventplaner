@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :events do
     resources :comments, shallow: true
     collection do
+      get :desided_all
       get :host
       get :gest
     end

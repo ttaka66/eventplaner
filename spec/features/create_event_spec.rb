@@ -50,7 +50,7 @@ feature 'イベント作成機能' do
 			end
 
 			shared_examples '正常な値を入力' do
-				scenario 'DBに保存の後イベント情報を表示' do
+				scenario 'DBに保存の後イベント情報を表示'  do
 					expect{
 						fill_in 'タイトル', with: '野球観戦'
 						fill_in 'メッセージ', with: '参加者募集'

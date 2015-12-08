@@ -13,6 +13,8 @@ class Event < ActiveRecord::Base
 	# has_many :users, through: :comments
 	accepts_nested_attributes_for :timeplans, allow_destroy: true
 
+  scope :newer, -> { order(created_at: :desc) }
+
 	def destroy_timeplans_and_entries
 		timeplans.each do |tp|
 			tp.entries.destroy_all

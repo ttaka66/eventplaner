@@ -15,12 +15,12 @@ class UsersController < ApplicationController
   def cancel_account
   end
   def friends
-  	@friends = User.find(params[:id]).friends
+  	@friends = User.find(params[:id]).friends.page(params[:friends_page]).per(10)
   	@user = User.new
   end
   def search
   	word = params[:word]
-  	@search_result = User.where('username like ? AND id != ?', "%#{word}%", current_user.id)
+  	@search_result = User.where('username like ? AND id != ?', "%#{word}%", current_user.id).limit(10)
   end
 
   private

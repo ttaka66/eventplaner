@@ -8,7 +8,7 @@
     </a>
     <div class="media-body">
       <h4 class="media-heading"><%= c.user.username %></h4>
-      <p><%= c.body %></p>
+      <p><%= simple_format(c.body) %></p>
       <p style="text-align:right;"><%= l(c.created_at, format: :short) %></p>
     </div>
   </li>

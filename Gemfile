@@ -77,7 +77,7 @@ group :test do
 	gem 'launchy' # 好きなタイミングでデフォルトのwebブラウザを開く為のgem
 	gem 'selenium-webdriver' # ブラウザ上でJavaScriptを利用する機能をcapybaraでテストする為のgem(GUI)
 	gem 'shoulda-matchers' # 便利なマッチャを使う為のgem
-  gem 'poltergeist' # ブラウザを動かす為のgem(CUI)
+  gem 'poltergeist', '~> 1.5.0' # ブラウザを動かす為のgem(CUI)
 end
 
 gem 'websocket-rails' #websocket通信を利用するためのgem

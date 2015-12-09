@@ -26,6 +26,45 @@
 .main{
 	margin-top: 60px;
 }
+body{
+  background-color: #000080;
+}
+
+#wrapper{
+  background-color: #000080;
+}
+
+#top-menu{
+  background-color: #fff;
+}
+#side-menu{
+  background-color: #000080;
+  
+}
+
+#side-menu a{
+    color: #fff;
+}
+
+#side-menu a:hover{
+    background-color: #44b6ef;
+}
+
+#side-menu a:focus{
+    background-color: #44b6ef;
+}
+
+#side-menu a:active{
+    background-color: #44b6ef;
+}
+
+#side-menu a:visited{
+    background-color: #44b6ef;
+}
+
+#page-wrapper{
+  background-color: rgba(245, 245, 245, 0.95);
+}
 
 .title{
 	padding-bottom: 9px;

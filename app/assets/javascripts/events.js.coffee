@@ -5,6 +5,11 @@
 
 initEvents = ->
 
+	#layout
+
+	$('.top_alert').on 'inview', ->
+		$(this).delay(2000).fadeOut(2000)
+
 	# events#new
 
 	# datetimepickerのオプション

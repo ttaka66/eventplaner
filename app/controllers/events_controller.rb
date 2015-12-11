@@ -87,13 +87,15 @@ class EventsController < ApplicationController
         tp.users << current_user
 
         # 招待メンバーのユーザー名を取得
-        @invitee_ids.each do |inv|
-          begin
-          # Userモデルを取得
-          i = User.find(inv)
-          # 候補日時に関連するユーザーを作成
-          tp.users << i
-          rescue
+        if @invitee_ids
+          @invitee_ids.each do |inv|
+            begin
+            # Userモデルを取得
+            i = User.find(inv)
+            # 候補日時に関連するユーザーを作成
+            tp.users << i
+            rescue
+            end
           end
 
         end

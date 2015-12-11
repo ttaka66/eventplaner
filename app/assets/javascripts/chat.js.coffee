@@ -1,3 +1,4 @@
+
 class @ChatClass
   constructor: (url, useWebsocket) ->
     # これがソケットのディスパッチャー
@@ -48,7 +49,7 @@ class @ChatClass
 
 # アラートを生成して表示
 showAlert = (alert, type)->
-  new_alert = $('<div>').addClass("alert alert-dismissible #{type}")
+  new_alert = $('<div>').addClass("alert alert-dismissible  top_alert #{type}")
   delete_button = $('<button>').addClass('close').attr({
     'type': 'button',
     'data-dismiss': "alert",
@@ -56,6 +57,8 @@ showAlert = (alert, type)->
     }).append($('<span>').attr('aria-hidden','true').text('×'))
   new_alert.append(delete_button).append(alert)
   $('.add_alert').append(new_alert)
+  new_alert.delay(2000).fadeOut(2000).queue ->
+    new_alert.remove()
 
 $ ->
   console.log('起動確認')

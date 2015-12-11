@@ -16,6 +16,7 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require moment/ja.js
+//= require jquery.inview.min.js
 //= require user_management.js
 //= require fullcalendar
 //= require bootstrap

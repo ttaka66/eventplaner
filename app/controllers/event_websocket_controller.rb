@@ -1,6 +1,6 @@
 # WebsocketRails::BaseControllerを継承
 
-class WebsocketChatController < WebsocketRails::BaseController
+class EventWebsocketController < WebsocketRails::BaseController
 
 	def initialize_session
     # perform application setup here
@@ -12,6 +12,11 @@ class WebsocketChatController < WebsocketRails::BaseController
 
     channel_name = message.channel_name
     WebsocketRails["#{channel_name}"].trigger(:new_message, message) 
+  end
+
+  def new_comment
+  	channel_name = message.channel_name
+  	WebsocketRails["#{channel_name}"].trigger(:new_entry, message)
   end
 
 end

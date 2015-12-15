@@ -16,7 +16,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :entries
+  resources :timeplans do
+    resources :entries, shallow: true do
+      member do
+        get :btn
+      end
+    end
+  end
 
   get 'home/index'
 

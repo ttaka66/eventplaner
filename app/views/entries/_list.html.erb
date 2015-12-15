@@ -1,0 +1,40 @@
+<p id="cnt"><span style="color:red;"><%= entries.where(attendance: true).count %> </span> <%= t("people can participate") %></p>
+
+<div class="panel panel-default">
+	<!-- Default panel contents -->
+	<div class="panel-heading"><%= t('participant list') %></div>
+
+	<!-- Table -->
+	<table class="table">
+		<tr>
+			<th><%= t('participant') %></th>
+			<th><%= t('message') %></th>
+		</tr>
+
+
+
+		<% if entries.where(attendance: true).count == 0 %>
+
+			<tr>
+				<td colspan="2"><%= t('there is no attendance people') %></td>
+			</tr>
+
+		<% else %>
+
+			<% entries.each do |ent| %>
+				<% if ent.attendance == true %>
+					<tr>
+						<td style="vertical-align: middle;">
+							<a href="#">
+								<%= image_tag 'no_image.jpg', width: 40, height: 40, class: "img-rounded" %>
+							</a>
+							<%= ent.user.username %>
+						</td>
+						<td><p style="vertical-align: middle;"><%= simple_format(ent.message) %></p></td>
+					</tr>
+				<% end %>
+			<% end %>
+		<% end %>
+
+	</table>
+</div>

@@ -1,0 +1,68 @@
+<!-- 参加・不参加変更の為のモーダルウィンドウ開始 -->
+<div id="entry_<%= entry.id %>" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header" align="center">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">
+					<%= entry.timeplan.event.title %><br />
+					<%=  "#{l(entry.timeplan.start, format: :short)} 〜 #{l(entry.timeplan.end, format: :short)}" %>
+				</h4>
+			</div>
+
+			<div class="modal-body">
+
+				<div class="entry_form">
+
+					<% if entry.attendance == true %>
+						<div class="form-horizontal" role="form">
+							<%= form_for(entry, remote: true) do |f| %>
+								<div class="form-group">
+									<p style="text-align:center;"><%= t('do you want to cancel ?') %>
+									</p>
+									<%= f.hidden_field :attendance, value: false %>
+								</div>
+								<div class="action" align="center">
+									<%= f.submit value: t('Yes I do'), class: "btn btn-primary",
+									data: { disable_with: '送信中' } %>
+								</div>
+							<% end %>
+						</div>
+					<% else %>
+						<div class="form-horizontal" role="form">
+							<%= form_for(entry, remote: true) do |f| %>
+								<div class="form-group">
+									<%= f.label :message, class: "control-label" %>
+									<%= f.text_area :message, class: "form-control", placeholder: "message", style: 'width: 100%;' %>
+								</div>
+								<%= f.hidden_field :attendance, value: true %>
+								<div class="action" align="center">
+									<%= f.submit value: t('I can attend'), class: "btn btn-success",
+									data: { disable_with: '送信中' } %>
+								</div>
+							<% end %>
+						</div>
+					<% end %>
+
+				</div>
+
+			</div>
+
+			<div class="modal-footer" align="center">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div><!-- /.modal-footer -->
+
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal fade -->
+<!-- モーダルウィンドウ終了 -->
+
+<% if entry.attendance == true %><!-- 参加できる場合 -->
+
+	<button type="button" class="btn btn-success can" data-toggle="modal" data-target="#entry_<%= entry.id %>"><%= t("I can attend") %></button>
+
+<% else %><!-- 参加できない場合 -->
+
+	<button type="button" class="btn btn-danger cant" data-toggle="modal" data-target="#entry_<%= entry.id %>"><%= t("I can't attend") %></button>
+
+<% end %><!-- end if -->

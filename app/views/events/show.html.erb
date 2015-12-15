@@ -151,7 +151,7 @@
 
     </div>
 
-    <%= javascript_include_tag 'chat' %>
+    <%= javascript_include_tag 'event_websocket' %>
 
     <% end %>
 
@@ -161,6 +161,6 @@
 </div>
 
 <% unless @event.address.empty? %>
-<script src="https://maps.googleapis.com/maps/api/js?sencor=true"></script>
-<%= javascript_include_tag 'map' %>
+  <script src="https://maps.googleapis.com/maps/api/js?sencor=true"></script>
+  <%= javascript_include_tag 'map' %>
 <% end %>

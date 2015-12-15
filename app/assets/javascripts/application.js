@@ -22,6 +22,7 @@
 //= require bootstrap
 //= require calendar
 //= require events
+//= require entries
 //= require websocket_rails/main
 //= require metisMenu.js
 //= require sb-admin-2.js

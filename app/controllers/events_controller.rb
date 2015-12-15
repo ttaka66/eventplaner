@@ -32,8 +32,6 @@ class EventsController < ApplicationController
   end
 
   def show
-    # GoogleMapの表示
-
     @comment = Comment.new
     @comments = @event.comments.page(params[:comment_page]).per(5).
       order(created_at: :desc)
@@ -42,20 +40,6 @@ class EventsController < ApplicationController
     if @event.color == 'yellow'
       # イベントに関するプラン取得
       @timeplans = @event.timeplans
-
-      # 個々のプラン取得
-      @timeplans.each do |tp|
-        # Timeplanに関する参加人数を集計
-        cnt = Entry.where(timeplan_id: tp.id, attendance: true).count
-        # attend_cntに代入
-        tp.attend_cnt = cnt
-        # 自分の出欠を取得
-        entry = Entry.find_by(user_id: current_user, timeplan_id: tp.id)
-        # my_attendにentryオブジェクトを代入
-        tp.my_entry = entry
-
-      end
-
     end
     respond_with(@event)
   end

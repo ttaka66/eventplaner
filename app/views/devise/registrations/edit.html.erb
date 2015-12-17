@@ -1,3 +1,7 @@
+<% if current_user.username == '仮ユーザー' %>
+仮ユーザーは変更できません
+<% else %>
+
 <div id="change_password" class="col-md-8 col-md-offset-2">
   <div class="row">
     <h2><%= t('change account') %></h2>
@@ -37,3 +41,5 @@
     </div>
   </div>
 </div>
+
+<% end %>

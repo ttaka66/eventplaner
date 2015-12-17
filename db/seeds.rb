@@ -19,3 +19,10 @@ end
 	User.create(username: "user#{n+1}", email: "user#{n+1}@test.com",
 		password: "password", confirmed_at: Time.now)
 end
+
+sample_user = User.create(username: "仮ユーザー", email: "sample_user@sample.com",
+	password: "password", confirmed_at: Time.now)
+
+10.times do |n|
+	sample_user.friends << User.find_by(username: "user#{n+1}")
+end

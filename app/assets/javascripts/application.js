@@ -20,6 +20,7 @@
 //= require user_management.js
 //= require fullcalendar
 //= require bootstrap
+//= require sample_user
 //= require calendar
 //= require events
 //= require entries

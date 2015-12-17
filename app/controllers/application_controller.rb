@@ -28,5 +28,11 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :username, :avatar, :email, :password, :remember_me) }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :avatar, :email, :password, :password_confirmation, :current_password) }
   end
+
+  def sample_user
+    if current_user.username == '仮ユーザー'
+      render text: '仮ユーザーは変更できません', layout:true
+    end
+  end
   
 end

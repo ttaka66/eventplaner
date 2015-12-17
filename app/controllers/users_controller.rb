@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 	before_action :authenticate_user!
   before_action :set_user, only: [:edit, :update]
   before_action :confirm_account, only: [:edit, :update, :cancel_account, :friends]
+  before_action :sample_user, only: [:edit, :update, :cancel_account]
 
 	def edit
 	end
@@ -39,5 +40,5 @@ class UsersController < ApplicationController
       redirect_to root_path, alert: t("can't show other's friends list")
     end
   end
-  	
+
 end
